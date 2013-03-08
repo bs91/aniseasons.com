@@ -1,6 +1,7 @@
 html {
-  height: 100%;
+    height: 100%;
 }
+
 body {
     background: url('/static/imgs/bgnoise.png') #f7f7f7;
     height: 100%;
@@ -15,21 +16,23 @@ body {
 }
 
 .contain {
-  min-height: 100%;
-  height: auto !important;
-  height: 100%;
-  margin: 0 auto -25px;
+    min-height: 100%;
+    height: auto !important;
+    height: 100%;
+    margin: 0 auto -25px;
 }
 
 .container {
     margin: 0 auto;
 }
+
 .navbar-push {
-  height: 100px;
-  width: 100%;
+    height: 100px;
+    width: 100%;
 }
+
 .push {
-  height: 25px;
+    height: 25px;
 }
 
 .overlay {
