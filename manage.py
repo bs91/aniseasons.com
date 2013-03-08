@@ -14,5 +14,14 @@ def createuser(username, password):
     else:
         print '{0} was successfully created'.format(username)
 
+@manager.command
+def deleteuser(username):
+    try:
+        mongo.db.users.remove({'username': username})
+    except:
+        print 'Could not delete user {0}'.format(username)
+    else:
+        print '{0} was successfully deleted'.format(username)
+
 if __name__ == '__main__':
     manager.run()
