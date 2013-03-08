@@ -1,0 +1,35 @@
+.table th {
+    text-align: center;
+}
+
+.image-wrapper {
+    margin-bottom: 25px;
+}
+
+.image-wrapper .image {
+    float: left;
+    margin-right: 25px;
+}
+
+.image-wrapper input[type="file"] {
+    margin-top: 125px;
+}
+
+#upload {
+    width: 830px;
+    margin: 0 auto;
+}
+
+.animelist {
+    overflow: auto;
+    margin-top: 50px;
+}
+
+textarea {
+    width: 732px;
+    height: 170px;
+}
+
+.submit {
+    text-align: center;
+}

@@ -1,0 +1,117 @@
+html {
+  height: 100%;
+}
+body {
+    background: url('/static/imgs/bgnoise.png') #f7f7f7;
+    height: 100%;
+}
+
+.noscroll {
+    overflow: hidden;
+}
+
+.red {
+    color: #ff0000;
+}
+
+.contain {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -25px;
+}
+
+.container {
+    margin: 0 auto;
+}
+.navbar-push {
+  height: 100px;
+  width: 100%;
+}
+.push {
+  height: 25px;
+}
+
+.overlay {
+    background: rgba(255, 255, 255, 0.9);
+    width: 100%;
+    z-index: 10000;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    position: fixed;
+    overflow-x: auto;
+    overflow-y: scroll;
+}
+
+.overlay:hover {
+    cursor: -webkit-zoom-out;
+}
+ 
+.overlay .macro {
+    margin: 20px auto;
+    padding: 10px 20px;
+    width: 428px;
+    background: #f2f0f0;
+    color: #8c7e7e;
+    text-shadow: 1px 1px #fff;
+    overflow: hidden;
+    -webkit-box-shadow: 0 3px 8px rgba(34,25,25,0.4);
+    -webkit-transition: all 1s ease-out;
+}
+
+.overlay .macro strong {
+    text-transform: capitalize;
+}
+
+.overlay .macro p:first-of-type {
+    margin-top: 25px;
+}
+
+.overlay .macro .button-wrapper {
+    margin-top: 10px;
+}
+
+.overlay .macro .button-wrapper i:first-child {
+    margin-right: 15px;
+}
+
+.overlay .macro:hover {
+    cursor: auto;
+}
+
+footer {
+    height: 15px;
+    text-align: center;
+    padding: 5px 0;
+    font-size: 12px;
+}
+
+/* Navigation Items */
+
+.nav-items {
+    width: 95%;
+    text-align: center;
+    margin: 0 auto;
+}
+
+.nav-items h3 {
+    float: left;
+}
+
+.nav-items .moonphase {
+    float: right;
+    margin-top: 20px;
+}
+
+.nav-items .view-state {
+    display: inline-block;
+    width: 100px;
+    position: relative;
+    top: 24px;
+}
+
+.nav-items .view-state .active {
+    border: 1px solid;
+}

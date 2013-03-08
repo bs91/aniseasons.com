@@ -1,0 +1,165 @@
+{% extends "base.html" %}
+{% block css %}
+    <link type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
+{% endblock %}
+{% block js %}
+    <script id="anime-form" type="text/x-handlebars-template">
+        {% raw %}
+        <form {{#if _id}}{{#with _id}}id="{{ $oid }}"{{/with}}{{/if}} class="entry well">
+            <div class="image-wrapper">
+                <div class="image" style="width: 150px; height: 150px; {{#if picture}}background: url('/media/imgs/{{picture}}') center center no-repeat;{{/if}} background-size: cover;"></div>
+                <input class="file" type="file" />
+            </div>
+            <table class="table table-bordered table-striped">
+                <thead>
+                    <tr>
+                        <th>Title</th>
+                        <th>Start Date</th>
+                        <th>Time</th>
+                        <th>Station</th>
+                        <th>Genre</th>
+                        <th>Website</th>
+                        <th>PV</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td  class="title" contenteditable="true">{{ title }}</td>
+                        <td  class="start" contenteditable="true">{{ start }}</td>
+                        <td  class="time" contenteditable="true">{{ time }}</td>
+                        <td  class="station" contenteditable="true">{{ station }}</td>
+                        <td  class="genre" contenteditable="true">{{ genre }}</td>
+                        <td  class="website" contenteditable="true">{{ website }}</td>
+                        <td  class="promo" contenteditable="true">{{ promo }}</td>
+                    </tr>
+                </tbody>
+                <thead>
+                    <tr>
+                        <th colspan="7">Description</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td class="description" colspan="7" contenteditable="true">{{ description }}</td>
+                    </tr>
+                </tbody>
+            </table>
+            <button type="submit" class="btn btn-primary update">Save</button>
+            <button type="submit" class="btn btn-danger delete">Delete</button>
+        </form>
+        {% endraw %}
+    </script>
+    <script type="text/javascript">
+        $.ajax({
+            url: '/anime/',
+            type: 'GET',
+            cache: false,
+            contentType: false,
+            processData: false
+        }).success(function(response) {
+            response = $.parseJSON(response);
+            var anime_template = Handlebars.compile($('#anime-form').html());
+            $.each(response, function(index, anime) {
+                $('#animelist').append(anime_template(anime));
+            });
+        });
+
+        $('.container').on('click', '.add', function() {
+            var anime_template = Handlebars.compile($('#anime-form').html());
+            $('#animelist').prepend(anime_template({}));
+        });
+
+        $('#animelist').on('click', '.update', function() {
+            var objectid = (typeof $(this).parent().attr('id') != 'undefined') ? $(this).parent().attr('id') : '';
+            var table_headers = $(this).parent().find('th');
+            var table_values = $(this).parent().find('td');
+            var data = new FormData();
+
+            if (typeof $(this).parent().find('.file').prop('files')[0] != 'undefined') {
+                data.append('file', $(this).parent().find('.file').prop('files')[0]);
+            }
+
+            $.each(table_headers, function(index) {
+                var title = $(this).text().toLowerCase();
+
+                if(title == 'pv') {
+                    title = 'promo';
+                }
+
+                if(title == 'start date') {
+                    title = 'start';
+                }
+
+                data.append(title, table_values[index].innerHTML);
+            });
+
+            $.ajax({
+                url: '/manage/' + objectid,
+                type: 'POST',
+                data: data,
+                cache: false,
+                contentType: false,
+                processData: false
+            }).success(function(response) {
+                console.log(response);
+            });
+
+            return false;
+        });
+
+        $('#animelist').on('click', '.delete', function() { 
+            var objectid = $(this).parent().attr('id');
+
+            if (objectid) {
+                $.ajax({
+                    url: '/delete/' + objectid,
+                    type: 'POST',
+                    cache: false,
+                    contentType: false,
+                    processData: false
+                }).success(function(response) {
+                    $('#' + objectid).remove();
+                });
+            } else {
+                $(this).parent().remove();
+            }
+
+            return false;
+        });
+
+        $('#animelist').on('change', '.file', function(input) {
+            if(input.target.files && input.target.files[0]) {
+                var reader = new FileReader();
+                var image_container = $(this).parent().children('.image');
+
+                reader.onload = function(e) {
+                    image_container.css('background-image', 'url("' + e.target.result  + '")');
+                };
+
+                reader.readAsDataURL(input.target.files[0]);
+            }
+        });
+    </script>
+{% endblock %}
+{% block nav %}
+    {% if session['logged_in'] %}
+        <a href="/logout">Logout</a>
+    {% endif %}
+{% endblock %}
+{% block content %}
+    {% if not session.logged_in %}
+    {% for message in get_flashed_messages() %}
+        <div class="flash">{{ message }}</div>
+    {% endfor %}
+    <form id="login" action="/admin" method="post">
+        <label for="username">Username: </label><input type="text" name="username" />
+        <label for="username">Password: </label><input type="password" name="password" />
+        <br />
+        <input type="submit" name="submit" value="Submit" />
+    </form>
+    {% else %}
+    <a class="add" href="#">Add</a>
+    <div id="animelist">
+    </div>
+    {% endif %}
+{% endblock %}
