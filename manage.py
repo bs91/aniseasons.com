@@ -6,8 +6,13 @@ manager = Manager(app)
 
 @manager.command
 def createuser(username, password):
-    pass_hash = generate_password_hash(password)
-    mongo.db.users.insert({'username': username, 'password': pass_hash})
+    try:
+        pass_hash = generate_password_hash(password)
+        mongo.db.users.insert({'username': username, 'password': pass_hash})
+    except:
+        print 'Could not create user {0}'.format(username)
+    else:
+        print '{0} was successfully created'.format(username)
 
 if __name__ == '__main__':
     manager.run()
