@@ -118,3 +118,7 @@ footer {
 .nav-items .view-state .active {
     border: 1px solid;
 }
+
+i  {
+    font-size: 20px;
+}
