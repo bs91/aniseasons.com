@@ -4,6 +4,7 @@ from werkzeug import secure_filename, check_password_hash
 from PIL import Image
 from bson import json_util
 import os
+import re
 
 # flask app settings
 app = Flask(__name__)
@@ -80,8 +81,8 @@ def manage_anime(anime_id=None):
         anime_data['picture-height'] = image.size[1]
 
     for key, value in request.form.iteritems():
-        if value != '':
-            anime_data[key] = value
+        value = re.sub('<[^<]+?>', '', value)
+        anime_data[key] = value
 
     if anime_id is not None:
         mongo.db.anime.update({'_id': anime_id}, {'$set': anime_data})
