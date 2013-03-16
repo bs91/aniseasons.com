@@ -76,8 +76,9 @@
         {% for a in anime %}
         <div class="item" data-title="{{ a['title'] }}" data-genre="{{ a['genre'] }}" data-start="{{ a['start'] }}" data-time="{{ a['time'] }}" data-station="{{ a['station'] }}" data-promo="{{ a['promo'] }}" data-website="{{ a['website'] }}" data-description="{{ a['description'] }}" data-picture="{{ a['picture'] }}">
             <img src="/media/imgs/{{ a['picture'] }}" />
-            <span>{{ a['title'] }}</span>
-            <span>{{ a['genre'] }}</span>
+            <span class="title">{{ a['title'] }}</span>
+            <span class="summary">{{ a['description']|truncate(100) }}</span>
+            <span class="genre">{{ a['genre'] }}</span>
         </div>
         {% endfor %}
     </div>
