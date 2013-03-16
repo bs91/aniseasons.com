@@ -35,7 +35,7 @@
                     }
                     data += "<p><strong>" + key + ":</strong> " + val + "</p>";
                 });
-                var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture icon-2x picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film icon-2x video' data-promo='" + anime.data('promo') + "'></i>" : "") + "</div>" + data + "</div></div>";
+                var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film video' data-promo='" + anime.data('promo') + "'></i>" : "") + "</div>" + data + "</div></div>";
                 $('.container').append(overlay);
                 $('body').addClass('noscroll');
             });
