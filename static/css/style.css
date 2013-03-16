@@ -3,7 +3,7 @@ html {
 }
 
 body {
-    background: url('/static/imgs/bgnoise.png') #f7f7f7;
+/*    background: url('/static/imgs/bgnoise.png') #f7f7f7; */
     height: 100%;
 }
 
@@ -119,6 +119,6 @@ footer {
     border: 1px solid;
 }
 
-i  {
+i {
     font-size: 20px;
 }
