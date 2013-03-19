@@ -4,6 +4,7 @@ from werkzeug.security import generate_password_hash
 
 manager = Manager(app)
 
+
 @manager.command
 def createuser(username, password):
     try:
@@ -13,6 +14,7 @@ def createuser(username, password):
         print 'Could not create user {0}'.format(username)
     else:
         print '{0} was successfully created'.format(username)
+
 
 @manager.command
 def deleteuser(username):

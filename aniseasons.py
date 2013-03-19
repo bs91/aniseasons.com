@@ -3,6 +3,7 @@ from flask.ext.pymongo import PyMongo
 from werkzeug import secure_filename, check_password_hash
 from PIL import Image
 from bson import json_util
+
 import os
 import re
 
@@ -12,7 +13,7 @@ app.config.from_object(__name__)
 app.config.from_envvar('ANIMELIST_SETTINGS', silent=True)
 app.secret_key = '}\xa8\xcd!\xcf\x00\\\xe7b\xec\x8a\\\xfdf\xd3J #\x880HUH\xb7'
 app.config['DEBUG'] = True
-app.config['PROJECT_PATH'] = os.path.realpath(os.path.dirname(__file__)) 
+app.config['PROJECT_PATH'] = os.path.realpath(os.path.dirname(__file__))
 app.config['MEDIA_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'media')
 app.config['UPLOAD_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'media/imgs/')
 app.config['STATIC_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'static')
@@ -30,6 +31,7 @@ if app.config['DEBUG']:
 # mongo connection initialization
 mongo = PyMongo(app)
 
+
 # helper method for resizing images to proper size
 def resize_image(pic):
     im = Image.open(pic)
@@ -41,9 +43,11 @@ def resize_image(pic):
 
     return im.resize((max_width, new_height), Image.ANTIALIAS)
 
+
 @app.route('/')
 def index():
-    return render_template("index.html", anime = mongo.db.anime.find().sort([['title', 1]]))
+    return render_template("index.html", anime=mongo.db.anime.find().sort([['title', 1]]))
+
 
 @app.route('/admin', methods=['GET', 'POST'])
 def admin():
@@ -59,12 +63,14 @@ def admin():
             return redirect(url_for('admin'))
         return render_template("add.html")
 
-    return render_template("add.html", anime = mongo.db.anime.find().sort([['_id', -1]]))
+    return render_template("add.html", anime=mongo.db.anime.find().sort([['_id', -1]]))
+
 
 @app.route('/logout', methods=['GET'])
 def logout():
     session.pop('logged_in', None)
     return redirect(url_for('index'))
+
 
 @app.route('/manage/', methods=['POST'])
 @app.route('/manage/<ObjectId:anime_id>', methods=['POST'])
@@ -91,14 +97,17 @@ def manage_anime(anime_id=None):
         mongo.db.anime.insert(anime_data)
         return "'{0}' has been added to the database".format(request.form['title'])
 
+
 @app.route('/anime/', methods=['GET'])
 def retrieve_animelist():
     return json_util.dumps(mongo.db.anime.find())
+
 
 @app.route('/anime/<ObjectId:anime_id>', methods=['GET'])
 def retrieve_anime(anime_id):
     anime = mongo.db.anime.find_one_or_404(anime_id)
     return json_util.dumps(anime)
+
 
 @app.route('/delete/<ObjectId:anime_id>', methods=['POST'])
 def delete_anime(anime_id):
