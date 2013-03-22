@@ -3,6 +3,7 @@
     <link type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
 {% endblock %}
 {% block js %}
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.2/jquery-ui.min.js"></script>
     <script id="anime-form" type="text/x-handlebars-template">
         {% raw %}
         <form {{#if _id}}{{#with _id}}id="{{ $oid }}"{{/with}}{{/if}} class="entry well">
@@ -25,14 +26,17 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td  class="title" contenteditable="true">{{ title }}</td>
-                        <td  class="start" contenteditable="true">{{ start }}</td>
-                        <td  class="time" contenteditable="true">{{ time }}</td>
-                        <td  class="station" contenteditable="true">{{ station }}</td>
-                        <td  class="genre" contenteditable="true">{{ genre }}</td>
-                        <td  class="website" contenteditable="true">{{ website }}</td>
-                        <td  class="promo" contenteditable="true">{{ promo }}</td>
-                        <td  class="season" contenteditable="true">{{ season }}</td>
+                        <td><span class="title" contenteditable="true">{{ title }}</span></td>
+                        <td>
+                            <span class="start">{{ start }}</span>
+                            <input type="hidden" class="datepicker" />
+                        </td>
+                        <td><span class="time" contenteditable="true">{{ time }}</span></td>
+                        <td><span class="station" contenteditable="true">{{ station }}</span></td>
+                        <td><span class="genre" contenteditable="true">{{ genre }}</span></td>
+                        <td><span class="website" contenteditable="true">{{ website }}</span></td>
+                        <td><span class="promo" contenteditable="true">{{ promo }}</span></td>
+                        <td><span class="season" contenteditable="true">{{ season }}</span></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -42,7 +46,7 @@
                 </thead>
                 <tbody>
                     <tr>
-                        <td class="description" colspan="7" contenteditable="true">{{ description }}</td>
+                        <td class="description" colspan="7"><textarea>{{ description }}</textarea></td>
                     </tr>
                 </tbody>
             </table>
@@ -64,6 +68,16 @@
             $.each(response, function(index, anime) {
                 $('#animelist').append(anime_template(anime));
             });
+
+            $('.datepicker').datepicker({
+                dateFormat: 'mm/dd/yy',
+                showOn: 'button',
+                buttonImage: 'images/calendar.png',
+                buttonImageOnly: true,
+                onClose: function(dateText, inst) {
+                    $(this).parent().find('span').focus().html(dateText).blur();
+                }
+            });
         });
 
         $('.container').on('click', '.add', function() {
@@ -74,7 +88,7 @@
         $('#animelist').on('click', '.update', function() {
             var objectid = (typeof $(this).parent().attr('id') != 'undefined') ? $(this).parent().attr('id') : '';
             var table_headers = $(this).parent().find('th');
-            var table_values = $(this).parent().find('td');
+            var table_values = $(this).parent().find('td span, td textarea');
             var data = new FormData();
 
             if (typeof $(this).parent().find('.file').prop('files')[0] != 'undefined') {
