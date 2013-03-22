@@ -3,6 +3,7 @@ from flask.ext.pymongo import PyMongo
 from werkzeug import secure_filename, check_password_hash
 from PIL import Image
 from bson import json_util
+from jinja2 import evalcontextfilter, Markup, escape
 
 import os
 import re
@@ -31,6 +32,16 @@ if app.config['DEBUG']:
 # mongo connection initialization
 mongo = PyMongo(app)
 
+_paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
+
+@app.template_filter()
+@evalcontextfilter
+def nl2br(eval_ctx, value):
+    result = u'\n\n'.join(u'<p>%s</p>' % p.replace('\n', '<br>\n') \
+        for p in _paragraph_re.split(escape(value)))
+    if eval_ctx.autoescape:
+        result = Markup(result)
+    return result
 
 # helper method for resizing images to proper size
 def resize_image(pic):

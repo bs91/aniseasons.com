@@ -33,6 +33,7 @@
                     if(key == "title" || key == "picture" || key == "promo" || val == "") {
                         return true;
                     }
+
                     data += "<p><strong>" + key + ":</strong> " + val + "</p>";
                 });
                 var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film video' data-promo='" + anime.data('promo') + "'></i>" : "") + "</div>" + data + "</div></div>";
@@ -74,7 +75,7 @@
 {% block content %}
     <div class="tile masonry">
         {% for a in anime %}
-        <div class="item" data-title="{{ a['title'] }}" data-genre="{{ a['genre'] }}" data-start="{{ a['start'] }}" data-time="{{ a['time'] }}" data-station="{{ a['station'] }}" data-promo="{{ a['promo'] }}" data-website="{{ a['website'] }}" data-description="{{ a['description'] }}" data-picture="{{ a['picture'] }}">
+        <div class="item" data-title="{{ a['title'] }}" data-genre="{{ a['genre'] }}" data-start="{{ a['start'] }}" data-time="{{ a['time'] }}" data-station="{{ a['station'] }}" data-promo="{{ a['promo'] }}" data-website="{{ a['website'] }}" data-description="{{ a['description']|nl2br }}" data-picture="{{ a['picture'] }}">
             <img src="/media/imgs/{{ a['picture'] }}" />
             <span class="title">{{ a['title'] }}</span>
             <span class="summary">{{ a['description']|truncate(100) }}</span>
