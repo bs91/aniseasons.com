@@ -70,7 +70,7 @@
             });
 
             $('.datepicker').datepicker({
-                dateFormat: 'mm/dd/yyyy',
+                dateFormat: 'mm/dd/yy',
                 showOn: 'button',
                 buttonImage: 'images/calendar.png',
                 buttonImageOnly: true,
@@ -106,7 +106,11 @@
                     title = 'start';
                 }
 
-                data.append(title, table_values[index].innerHTML);
+                if(title == "description") {
+                    data.append(title, table_values[index].value);
+                } else {
+                    data.append(title, table_values[index].innerHTML);
+                }
             });
 
             $.ajax({
