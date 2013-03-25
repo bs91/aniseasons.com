@@ -73,14 +73,17 @@
     </script>
 {% endblock %}
 {% block content %}
+    {% for key, season in seasons.iteritems() %}
+    <h1>{{ key }}</h1>
     <div class="tile masonry">
-        {% for a in anime %}
-        <div class="item" data-title="{{ a['title'] }}" data-genre="{{ a['genre'] }}" data-start="{{ a['start'] }}" data-time="{{ a['time'] }}" data-station="{{ a['station'] }}" data-promo="{{ a['promo'] }}" data-website="{{ a['website'] }}" data-description="{{ a['description']|nl2br }}" data-picture="{{ a['picture'] }}">
-            <img src="/media/imgs/{{ a['picture'] }}" />
-            <span class="title">{{ a['title'] }}</span>
-            <span class="summary">{{ a['description']|truncate(100) }}</span>
-            <span class="genre">{{ a['genre'] }}</span>
+        {% for anime in season %}
+        <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-station="{{ anime['station'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
+            <img src="/media/imgs/{{ anime['picture'] }}" />
+            <span class="title">{{ anime['title'] }}</span>
+            <span class="summary">{{ anime['description']|truncate(100) }}</span>
+            <span class="genre">{{ anime['genre'] }}</span>
         </div>
         {% endfor %}
     </div>
+    {% endfor %}
 {% endblock %}

@@ -4,6 +4,7 @@ from werkzeug import secure_filename, check_password_hash
 from PIL import Image
 from bson import json_util
 from jinja2 import evalcontextfilter, Markup, escape
+from collections import OrderedDict
 
 import os
 import re
@@ -57,7 +58,13 @@ def resize_image(pic):
 
 @app.route('/')
 def index():
-    return render_template("index.html", anime=mongo.db.anime.find().sort([['title', 1]]))
+    seasons = ['winter', 'spring', 'summer', 'fall']
+    anime = OrderedDict()
+
+    for season in seasons:
+        anime[season] = mongo.db.anime.find({'season': season})
+
+    return render_template("index.html", seasons=anime)
 
 
 @app.route('/admin', methods=['GET', 'POST'])
@@ -100,6 +107,9 @@ def manage_anime(anime_id=None):
     for key, value in request.form.iteritems():
         value = re.sub('<[^<]+?>', '', value)
         anime_data[key] = value
+
+    if anime_data['start']:
+        anime_data['year'] = anime_data['start'].split('/')[2]
 
     if anime_id is not None:
         mongo.db.anime.update({'_id': anime_id}, {'$set': anime_data})
