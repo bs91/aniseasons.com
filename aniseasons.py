@@ -132,7 +132,10 @@ def retrieve_anime(anime_id):
 
 @app.route('/delete/<ObjectId:anime_id>', methods=['POST'])
 def delete_anime(anime_id):
+    anime = mongo.db.anime.find_one(anime_id)
+    os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['picture']))
     mongo.db.anime.remove({'_id': anime_id})
+
     return "Anime removed"
 
 # flask glue
