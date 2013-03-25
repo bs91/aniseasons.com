@@ -77,7 +77,7 @@
     <h1>{{ key }}</h1>
     <div class="tile masonry">
         {% for anime in season %}
-        <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-station="{{ anime['station'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
+        <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-studio="{{ anime['studio'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
             <img src="/media/imgs/{{ anime['picture'] }}" />
             <span class="title">{{ anime['title'] }}</span>
             <span class="summary">{{ anime['description']|truncate(100) }}</span>
