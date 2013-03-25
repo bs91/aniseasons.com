@@ -22,6 +22,7 @@
                         <th>Website</th>
                         <th>PV</th>
                         <th>Season</th>
+                        <th>Type</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -37,6 +38,7 @@
                         <td><span class="website" contenteditable="true">{{ website }}</span></td>
                         <td><span class="promo" contenteditable="true">{{ promo }}</span></td>
                         <td><span class="season" contenteditable="true">{{ season }}</span></td>
+                        <td><span class="type" contenteditable="true">{{ type }}</span></td>
                     </tr>
                 </tbody>
                 <thead>
@@ -80,7 +82,8 @@
             });
         });
 
-        $('.container').on('click', '.add', function() {
+        $('.container').on('click', '.add', function(e) {
+            e.preventDefault();
             var anime_template = Handlebars.compile($('#anime-form').html());
             $('#animelist').prepend(anime_template({}));
         });
