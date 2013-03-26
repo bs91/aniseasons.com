@@ -62,7 +62,7 @@ def index():
     anime = OrderedDict()
 
     for season in seasons:
-        anime[season] = mongo.db.anime.find({'season': season})
+        anime[season] = mongo.db.anime.find({'season': season}).sort([['start', 1]])
 
     return render_template("index.html", seasons=anime)
 
