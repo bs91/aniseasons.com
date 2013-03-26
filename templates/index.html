@@ -75,8 +75,10 @@
 {% block content %}
     {% for key, season in seasons.iteritems() %}
     <h1>{{ key }}</h1>
+    {% for type in season|groupby('type')|reverse %} 
+    <p>{{ type.grouper }}</p>
     <div class="tile masonry">
-        {% for anime in season %}
+        {% for anime in type.list %}
         <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-studio="{{ anime['studio'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
             <img src="/media/imgs/{{ anime['picture'] }}" />
             <span class="title">{{ anime['title'] }}</span>
@@ -85,5 +87,6 @@
         </div>
         {% endfor %}
     </div>
+    {% endfor %}
     {% endfor %}
 {% endblock %}
