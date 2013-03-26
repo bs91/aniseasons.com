@@ -56,7 +56,7 @@
                 if($(this).hasClass('video')) {
                     if(('.macro object').length > 0) {
                         var vid_id = $(this).data('promo');
-                        var params = { allowScriptAccess: "always" };
+                        var params = { allowScriptAccess: "always", allowFullScreen: "true" };
                         var atts = { id: "promo-vid" };
                         swfobject.embedSWF("http://www.youtube.com/v/" + vid_id + "?enablejsapi=1&playerapiid=ytplayer&version=3", "media-container", "600", "338", "8", null, null, params, atts);
                     } else {
