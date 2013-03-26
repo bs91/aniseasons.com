@@ -75,6 +75,10 @@
     margin-top: 0;
 }
 
+.season {
+    display: none;
+}
+
 @media screen and (min-width: 1170px) {
     .container {
         width: 1170px;

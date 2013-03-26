@@ -18,14 +18,54 @@
     </script>
     <script type="text/javascript">
         $(document).ready(function() {
-            var container = $('.tile');
+            var d = new Date();
+            var initial_season;
+
+            switch(d.getMonth()) {
+            case 0:
+            case 1:
+            case 2:
+            initial_season = 'spring';
+            break;
+            case 3:
+            case 4:
+            case 5:
+            initial_season = 'summer';
+            break;
+            case 6:
+            case 7:
+            case 8:
+            initial_season = 'fall';
+            break;
+            case 9:
+            case 10:
+            case 11:
+            initial_season = 'winter';
+            break;
+            }
+
+            $('#' + initial_season).fadeIn(1500);
+            var container = $('#' + initial_season + ' .tile');
             container.imagesLoaded(function() {
                 container.masonry({
                     itemSelector : '.item',
                     columnWidth: 234
                 });
+            });
 
-
+            var prev = initial_season;
+            $('.winter, .spring, .summer, .fall').click(function() {
+                var season = $(this).attr('class');
+                $('#' + prev).fadeOut();
+                $('#' + season).fadeIn();
+                var container = $('#' + season + ' .tile');
+                container.imagesLoaded(function() {
+                    container.masonry({
+                        itemSelector : '.item',
+                        columnWidth: 234
+                    });
+                });
+                prev = season;
             });
 
             $('.item img, .item span:nth-of-type(1)').click(function() {
@@ -74,8 +114,17 @@
         });
     </script>
 {% endblock %}
+
+{% block nav %}
+    <a class="winter" href="#">Winter</a>
+    <a class="spring" href="#">Spring</a>
+    <a class="summer" href="#">Summer</a>
+    <a class="fall" href="#">Fall</a>
+{% endblock %}
+
 {% block content %}
     {% for key, season in seasons.iteritems() %}
+    <div id="{{ key }}" class="season">
     <h1>{{ key|capitalize }}</h1>
     {% for type in season|groupby('type')|reverse %} 
     <p>{{ type.grouper }}</p>
@@ -90,5 +139,6 @@
         {% endfor %}
     </div>
     {% endfor %}
+    </div>
     {% endfor %}
 {% endblock %}
