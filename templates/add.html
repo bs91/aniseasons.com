@@ -22,6 +22,7 @@
                         <th>Website</th>
                         <th>PV</th>
                         <th>Season</th>
+                        <th>Year</th>
                         <th>Type</th>
                     </tr>
                 </thead>
@@ -38,6 +39,7 @@
                         <td><span class="website" contenteditable="true">{{ website }}</span></td>
                         <td><span class="promo" contenteditable="true">{{ promo }}</span></td>
                         <td><span class="season" contenteditable="true">{{ season }}</span></td>
+                        <td><span class="year" contenteditable="true">{{ year }}</span></td>
                         <td><span class="type" contenteditable="true">{{ type }}</span></td>
                     </tr>
                 </tbody>
@@ -90,6 +92,7 @@
 
         $('#animelist').on('click', '.update', function() {
             var objectid = (typeof $(this).parent().attr('id') != 'undefined') ? $(this).parent().attr('id') : '';
+            var this_form = $(this);
             var table_headers = $(this).parent().find('th');
             var table_values = $(this).parent().find('td span, td textarea');
             var data = new FormData();
@@ -124,6 +127,10 @@
                 contentType: false,
                 processData: false
             }).success(function(response) {
+                if(objectid == '') {
+                    this_form.parent().attr('id', response);
+                }
+
                 console.log(response);
             });
 

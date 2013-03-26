@@ -48,7 +48,7 @@ def nl2br(eval_ctx, value):
 def resize_image(pic):
     im = Image.open(pic)
     dimensions = im.size
-    max_width = 428
+    max_width = 600
 
     width_percent = (max_width / float(dimensions[0]))
     new_height = int((float(dimensions[1]) * float(width_percent)))
@@ -108,15 +108,13 @@ def manage_anime(anime_id=None):
         value = re.sub('<[^<]+?>', '', value)
         anime_data[key] = value
 
-    if anime_data['start']:
-        anime_data['year'] = anime_data['start'].split('/')[2]
-
     if anime_id is not None:
         mongo.db.anime.update({'_id': anime_id}, {'$set': anime_data})
         return "'{0}' has been updated".format(request.form['title'])
     else:
         mongo.db.anime.insert(anime_data)
-        return "'{0}' has been added to the database".format(request.form['title'])
+        anime = mongo.db.anime.find_one({'title': request.form['title']})
+        return "{0}".format(anime['_id'])
 
 
 @app.route('/anime/', methods=['GET'])
