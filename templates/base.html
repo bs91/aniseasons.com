@@ -29,6 +29,6 @@
       </footer>
     </body>
     <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="https://raw.github.com/wycats/handlebars.js/1.0.rc.2/dist/handlebars.js"></script>
+    <script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.js') }}"></script>
     {% block js %}{% endblock %}
 </html>
