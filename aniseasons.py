@@ -120,7 +120,7 @@ def manage_anime(anime_id=None):
 
 @app.route('/anime/', methods=['GET'])
 def retrieve_animelist():
-    return json_util.dumps(mongo.db.anime.find())
+    return json_util.dumps(mongo.db.anime.find().sort([['_id', -1]]))
 
 
 @app.route('/anime/<ObjectId:anime_id>', methods=['GET'])
