@@ -45,10 +45,9 @@ def nl2br(eval_ctx, value):
     return result
 
 # helper method for resizing images to proper size
-def resize_image(pic):
+def resize_image(pic, max_width):
     im = Image.open(pic)
     dimensions = im.size
-    max_width = 600
 
     width_percent = (max_width / float(dimensions[0]))
     new_height = int((float(dimensions[1]) * float(width_percent)))
@@ -98,11 +97,13 @@ def manage_anime(anime_id=None):
     if request.files:
         filename = secure_filename(request.form['title'] + '.jpg') if request.form['title'] else secure_filename(request.files['file'].filename)
         # TODO: add exception handling when image resizing fails
-        image = resize_image(request.files['file'])
-        image.save(os.path.join(app.config['UPLOAD_PATH'], filename))
+        image = resize_image(request.files['file'], 600)
+        image.save(os.path.join(app.config['UPLOAD_PATH'], filename), 'JPEG', quality=95)
+        thumb = resize_image(open(os.path.join(app.config['UPLOAD_PATH'], filename)), 194)
+        thumb.save(os.path.join(app.config['UPLOAD_PATH'], "thumb_" + filename), 'JPEG',  quality=95)
+
         anime_data['picture'] = filename
-        anime_data['picture-width'] = image.size[0]
-        anime_data['picture-height'] = image.size[1]
+        anime_data['thumb'] = "thumb_" + filename
 
     for key, value in request.form.iteritems():
         value = re.sub('<[^<]+?>', '', value)
@@ -131,7 +132,12 @@ def retrieve_anime(anime_id):
 @app.route('/delete/<ObjectId:anime_id>', methods=['POST'])
 def delete_anime(anime_id):
     anime = mongo.db.anime.find_one(anime_id)
-    os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['picture']))
+    try:
+        os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['picture']))
+        os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['thumb']))
+    except Exception as e:
+        print e
+
     mongo.db.anime.remove({'_id': anime_id})
 
     return "Anime removed"
