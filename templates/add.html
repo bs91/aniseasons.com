@@ -127,11 +127,14 @@
                 contentType: false,
                 processData: false
             }).success(function(response) {
+                var title = this_form.parent().find('.title').text();
                 if(objectid == '') {
                     this_form.parent().attr('id', response);
+                    $('<div class="alert alert-success" style="float: right"><b>' + title + '</b> has been added.</div>').hide().appendTo('#' + response).fadeIn().delay(5000).fadeOut('slow', function() { $(this).remove() });
+                } else {
+                    $('<div class="alert alert-success" style="float: right"><b>' + title + '</b> has been updated.</div>').hide().appendTo('#' + objectid).fadeIn().delay(5000).fadeOut('slow', function() { $(this).remove() });
                 }
 
-                console.log(response);
             });
 
             return false;
