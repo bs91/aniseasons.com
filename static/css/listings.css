@@ -1,7 +1,7 @@
 .tile .item {
     float: left;
     padding: 10px;
-    background: #f2f0f0;
+    background: #fff;
     margin: 10px;
     width: 194px;
     box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -20,7 +20,6 @@
 .tile .item span {
     color: #8c7e7e;
     font-weight: 500;
-    text-shadow: 1px 1px #fff;
     display: block;
 }
 
