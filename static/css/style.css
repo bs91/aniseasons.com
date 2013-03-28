@@ -3,7 +3,7 @@ html {
 }
 
 body {
-/*    background: url('/static/imgs/bgnoise.png') #f7f7f7; */
+    background: url('http://i.imgur.com/rjITUjM.png');
     height: 100%;
 }
 
@@ -22,6 +22,12 @@ body {
     margin: 0 auto -25px;
 }
 
+.float {
+    position: fixed;
+    top: 70px;
+    left: 40%;
+}
+
 .container {
     margin: 0 auto;
 }
@@ -35,8 +41,22 @@ body {
     height: 25px;
 }
 
+.nav-items .winter, .nav-items .spring, .nav-items .summer, .nav-items .fall {
+    line-height: 60px;
+    margin-right: 10px;
+    font-weight: bold;
+}
+
+.nav-items a {
+    color: #fff;
+}
+
+.nav-items a:hover {
+    color: #fff;
+}
+
 .overlay {
-    background: rgba(255, 255, 255, 0.9);
+    background: rgba(230, 230, 230, 0.9);
     width: 100%;
     z-index: 10000;
     top: 0;
@@ -56,9 +76,8 @@ body {
     margin: 20px auto;
     padding: 10px 20px;
     width: 600px;
-    background: #f2f0f0;
+    background: #fff;
     color: #8c7e7e;
-    text-shadow: 1px 1px #fff;
     overflow: hidden;
     -webkit-box-shadow: 0 3px 8px rgba(34,25,25,0.4);
     -webkit-transition: all 1s ease-out;
@@ -121,4 +140,8 @@ footer {
 
 i {
     font-size: 20px;
+}
+
+a.selected {
+    color: #08c;
 }
