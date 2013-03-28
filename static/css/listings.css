@@ -79,28 +79,28 @@
 }
 
 @media screen and (min-width: 1170px) {
-    .container {
+    .container, .nav-items {
         width: 1170px;
         margin: 0 auto;
     }
 }
 
 @media screen and (min-width: 1404px) {
-    .container {
+    .container, .nav-items {
         width: 1404px;
         margin: 0 auto;
     }
 }
 
 @media screen and (min-width: 1638px) {
-    .container {
+    .container. nav-items {
         width: 1638px;
         margin: 0 auto;
     }
 }
 
 @media screen and (min-width: 1872px) {
-    .container {
+    .container, .nav-items {
         width: 1872px;
         margin: 0 auto;
     }
