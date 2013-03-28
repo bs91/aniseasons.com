@@ -44,7 +44,9 @@
             break;
             }
 
+            // TODO: refactor switching logic.
             $('#' + initial_season).fadeIn(1500);
+            $('.' + initial_season).addClass('selected');
             var container = $('#' + initial_season + ' .tile');
             container.imagesLoaded(function() {
                 container.masonry({
@@ -54,18 +56,28 @@
             });
 
             var prev = initial_season;
-            $('.winter, .spring, .summer, .fall').click(function() {
+            $('.winter, .spring, .summer, .fall').click(function(e) {
+                e.preventDefault();
                 var season = $(this).attr('class');
-                $('#' + prev).fadeOut();
-                $('#' + season).fadeIn();
-                var container = $('#' + season + ' .tile');
-                container.imagesLoaded(function() {
-                    container.masonry({
-                        itemSelector : '.item',
-                        columnWidth: 234
+                console.log();
+                if($(this).hasClass('selected')) {
+                    return false;
+                } else if($('#' + season + ' .tile').length == 0) {
+                    $('<div class="alert alert-error float"><b>Sorry!</b> There is currently no anime for that season.</div>').hide().appendTo('body').fadeIn().delay(2000).fadeOut('slow', function() { $(this).remove() });
+                } else {
+                    $('.selected').removeClass('selected');
+                    $(this).addClass('selected');
+                    $('#' + prev).fadeOut();
+                    $('#' + season).fadeIn();
+                    var container = $('#' + season + ' .tile');
+                    container.imagesLoaded(function() {
+                        container.masonry({
+                            itemSelector : '.item',
+                            columnWidth: 234
+                        });
                     });
-                });
-                prev = season;
+                    prev = season;
+                }
             });
 
             $('.item img, .item span:nth-of-type(1)').click(function() {
@@ -116,10 +128,10 @@
 {% endblock %}
 
 {% block nav %}
-    <a class="winter" href="#">Winter</a>
-    <a class="spring" href="#">Spring</a>
-    <a class="summer" href="#">Summer</a>
-    <a class="fall" href="#">Fall</a>
+    <a class="winter" href="#">Winter 2013</a>
+    <a class="spring" href="#">Spring 2013</a>
+    <a class="summer" href="#">Summer 2013</a>
+    <a class="fall" href="#">Fall 2013</a>
 {% endblock %}
 
 {% block content %}
