@@ -5,6 +5,7 @@ html {
 body {
     background: url('http://i.imgur.com/rjITUjM.png');
     height: 100%;
+    font-family: 'Merriweather Sans', sans-serif;
 }
 
 .noscroll {
