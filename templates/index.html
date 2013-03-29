@@ -91,7 +91,11 @@
                         return true;
                     }
 
-                    data += "<p><strong>" + key + ":</strong> " + val + "</p>";
+                    if (key == "website") {
+                        data += "<p><strong>" + key + ":</strong> <a href='" + val + "' target='_blank'>" + val + "</a></p>";
+                    } else {
+                        data += "<p><strong>" + key + ":</strong> " + val + "</p>";
+                    }
                 });
                 var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film video' data-promo='" + anime.data('promo') + "'></i>" : "") + "</div>" + data + "</div></div>";
                 $('.container').append(overlay);
