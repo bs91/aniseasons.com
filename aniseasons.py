@@ -131,16 +131,19 @@ def retrieve_anime(anime_id):
 
 @app.route('/delete/<ObjectId:anime_id>', methods=['POST'])
 def delete_anime(anime_id):
-    anime = mongo.db.anime.find_one(anime_id)
-    try:
-        os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['picture']))
-        os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['thumb']))
-    except Exception as e:
-        print e
+    if 'logged_in' in session:
+        anime = mongo.db.anime.find_one(anime_id)
+        try:
+            os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['picture']))
+            os.remove(os.path.join(app.config['UPLOAD_PATH'], anime['thumb']))
+        except Exception as e:
+            print e
 
-    mongo.db.anime.remove({'_id': anime_id})
+        mongo.db.anime.remove({'_id': anime_id})
 
-    return "Anime removed"
+        return "Anime removed"
+    else:
+        return "You do not have permission to do that"
 
 # flask glue
 if __name__ == '__main__':
