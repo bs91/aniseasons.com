@@ -20,7 +20,7 @@ body {
     min-height: 100%;
     height: auto !important;
     height: 100%;
-    margin: 0 auto -25px;
+    margin: 0 auto -40px;
 }
 
 .float {
@@ -39,7 +39,7 @@ body {
 }
 
 .push {
-    height: 25px;
+    height: 40px;
 }
 
 .nav-items .winter, .nav-items .spring, .nav-items .summer, .nav-items .fall {
@@ -105,7 +105,10 @@ body {
 }
 
 footer {
-    height: 15px;
+    height: 40px;
+    background: #1b1b1b;
+    line-height: 40px;
+    color: #fff;
     text-align: center;
     padding: 5px 0;
     font-size: 12px;
