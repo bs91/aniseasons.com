@@ -143,6 +143,33 @@ i {
     font-size: 20px;
 }
 
-a.selected {
+a.selected:hover {
+    text-decoration: none;
+}
+
+a.selected.winter {
     color: #08c;
+}
+
+a.selected.spring {
+    color: #5eb95e;
+}
+
+a.selected.summer {
+    color: #dd514c;
+}
+
+a.selected.fall {
+    color: #faa732;
+}
+
+.season h1 {
+    margin-bottom: 45px;
+}
+
+.season .alert {
+    margin-top: 45px;
+    width: 100px;
+    text-align: center;
+    padding: 8px 14px 8px 14px;
 }

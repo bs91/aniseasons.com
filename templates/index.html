@@ -139,7 +139,7 @@
     <div id="{{ key }}" class="season">
     <h1>{{ key|capitalize }}</h1>
     {% for type in season|groupby('type')|reverse %} 
-    <p>{{ type.grouper }}</p>
+    <div class="alert"><h4>{{ type.grouper }}</h4></div>
     <div class="tile masonry">
         {% for anime in type.list %}
         <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-studio="{{ anime['studio'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
