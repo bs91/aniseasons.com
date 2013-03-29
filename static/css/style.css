@@ -169,7 +169,9 @@ a.selected.fall {
 
 .season .alert {
     margin-top: 45px;
-    width: 100px;
-    text-align: center;
     padding: 8px 14px 8px 14px;
+}
+
+.season .alert h4 {
+    margin-left: 10px;
 }
