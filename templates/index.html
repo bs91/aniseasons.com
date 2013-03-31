@@ -87,7 +87,7 @@
                 var data = "";
                 var anime = $(this).parent();
                 $.each(anime.data(), function(key, val) {
-                    if(key == "title" || key == "picture" || key == "promo" || val == "") {
+                    if(key == "title" || key == "picture" || key == "promo" || key == "twitter" || val == "") {
                         return true;
                     }
 
@@ -97,7 +97,7 @@
                         data += "<p><strong>" + key + ":</strong> " + val + "</p>";
                     }
                 });
-                var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film video' data-promo='" + anime.data('promo') + "'></i>" : "") + "</div>" + data + "</div></div>";
+                var overlay = "<div class='overlay'><div class='macro'><h3>" + anime.data('title') + "</h3><div id='media-container'><img src='/media/imgs/" + anime.data('picture') + "'/></div><div class='button-wrapper'><i class='icon-picture icon picture red' data-picture='" + anime.data('picture') + "'></i>" + ((anime.data('promo') != "") ? "<i class='icon-film icon video' data-promo='" + anime.data('promo') + "'></i>" : "") + ((anime.data('twitter') != "") ? "<a href='http://twitter.com/" + anime.data('twitter') + "' target='_blank'><i class='icon-twitter blue' style='float: right;'></i></a>" : "") + "</div>" + data + "</div></div>";
                 $('.container').append(overlay);
                 $('body').addClass('noscroll');
             });
@@ -111,7 +111,7 @@
                 e.stopPropagation();
             });
 
-            $('.container').on('click', '.button-wrapper i', function() {
+            $('.container').on('click', '.button-wrapper .icon', function() {
                 if($(this).hasClass('video')) {
                     if(('.macro object').length > 0) {
                         var vid_id = $(this).data('promo');
@@ -149,7 +149,7 @@
     <div class="alert"><h4>{{ type.grouper }}</h4></div>
     <div class="tile masonry">
         {% for anime in type.list %}
-        <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-studio="{{ anime['studio'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
+        <div class="item" data-title="{{ anime['title'] }}" data-genre="{{ anime['genre'] }}" data-start="{{ anime['start'] }}" data-time="{{ anime['time'] }}" data-studio="{{ anime['studio'] }}" data-promo="{{ anime['promo'] }}" data-website="{{ anime['website'] }}" data-twitter="{{ anime['twitter'] }}" data-description="{{ anime['description']|nl2br }}" data-picture="{{ anime['picture'] }}">
             <img src="/media/imgs/{{ anime['thumb'] }}" />
             <span class="title">{{ anime['title'] }}</span>
             <span class="summary">{{ anime['description']|truncate(100) }}</span>
