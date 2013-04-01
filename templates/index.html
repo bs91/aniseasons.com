@@ -59,7 +59,6 @@
             $('.winter, .spring, .summer, .fall').click(function(e) {
                 e.preventDefault();
                 var season = $(this).attr('class');
-                console.log();
                 if($(this).hasClass('selected')) {
                     return false;
                 } else if($('#' + season + ' .tile').length == 0) {
