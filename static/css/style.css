@@ -16,6 +16,11 @@ body {
     color: #ff0000;
 }
 
+.button-wrapper a:hover {
+    color: #08c;
+    text-decoration: none;
+}
+
 .contain {
     min-height: 100%;
     height: auto !important;
