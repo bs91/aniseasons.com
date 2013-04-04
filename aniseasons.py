@@ -22,6 +22,8 @@ app.config['STATIC_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'static')
 
 if not os.path.exists(app.config['UPLOAD_PATH']):
     os.makedirs(app.config['UPLOAD_PATH'])
+    os.chmod(app.config['MEDIA_PATH'], 0775)
+    os.chmod(app.config['UPLOAD_PATH'], 0775)
 
 if app.config['DEBUG']:
     from werkzeug import SharedDataMiddleware
