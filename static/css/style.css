@@ -178,8 +178,11 @@ a.selected.fall {
 .season .alert {
     margin-top: 45px;
     padding: 8px 14px 8px 14px;
+    background: #1b1b1b;
+    border: none;
 }
 
 .season .alert h4 {
     margin-left: 10px;
+    color: #fff;
 }
