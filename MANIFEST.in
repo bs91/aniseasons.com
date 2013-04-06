@@ -1,0 +1,2 @@
+recursive-include aniseasons/templates *
+recursive-include aniseasons/static *
