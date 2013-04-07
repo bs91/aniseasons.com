@@ -11,5 +11,11 @@ env.keyfile = KEY_FILE
 
 def deploy():
     with cd(DEPLOY_PATH):
+        print '--- Pulling Changes from Server ---'
         run('git pull origin master')
+
+        print '--- Installing Packages ---'
+        sudo('pip install -r requirements.txt')
+
+        print '--- Restarting UWSGI Instance ---'
         sudo('service uwsgi restart')
