@@ -1,5 +1,7 @@
 # aniseasons.com
 
+[![Build status](https://secure.travis-ci.org/hkal/aniseasons.com.png)](http://travis-ci.org/#!/hkal/aniseasons.com)
+
 Seasonal anime listing that doesn't suck.
 
 ## Setup
