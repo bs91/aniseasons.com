@@ -1,5 +1,6 @@
 *.pyc
 *.swp
+.deploy_settings
 media/
 aniseasons.egg-info/
 dist/
