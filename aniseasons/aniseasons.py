@@ -1,24 +1,14 @@
-from flask import Flask, flash, session, redirect, url_for, render_template, request, Response
-from flask.ext.pymongo import PyMongo
+from flask import flash, session, redirect, url_for, render_template, request, Response
 from werkzeug import secure_filename, check_password_hash
 from PIL import Image
 from bson import json_util
 from jinja2 import evalcontextfilter, Markup, escape
 from collections import OrderedDict
 
+from app import app, mongo
+
 import os
 import re
-
-# flask app settings
-app = Flask(__name__)
-app.config.from_object(__name__)
-app.config.from_envvar('ANIMELIST_SETTINGS', silent=True)
-app.secret_key = '}\xa8\xcd!\xcf\x00\\\xe7b\xec\x8a\\\xfdf\xd3J #\x880HUH\xb7'
-app.config['DEBUG'] = False
-app.config['PROJECT_PATH'] = os.path.realpath(os.path.dirname(__file__))
-app.config['MEDIA_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'media')
-app.config['UPLOAD_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'media/imgs/')
-app.config['STATIC_PATH'] = os.path.join(app.config['PROJECT_PATH'], 'static')
 
 if not os.path.exists(app.config['UPLOAD_PATH']):
     os.makedirs(app.config['UPLOAD_PATH'])
@@ -31,9 +21,6 @@ if app.config['DEBUG']:
         '/media': app.config['MEDIA_PATH'],
         '/static': app.config['STATIC_PATH'],
     })
-
-# mongo connection initialization
-mongo = PyMongo(app)
 
 _paragraph_re = re.compile(r'(?:\r\n|\r|\n){2,}')
 
