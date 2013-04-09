@@ -186,7 +186,7 @@
     {% for message in get_flashed_messages() %}
         <div class="flash">{{ message }}</div>
     {% endfor %}
-    <form id="login" action="/admin" method="post">
+    <form id="login" action="{{ url_for('admin') }}" method="post">
         <label for="username">Username: </label><input type="text" name="username" />
         <label for="username">Password: </label><input type="password" name="password" />
         <br />
