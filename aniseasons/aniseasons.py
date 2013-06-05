@@ -6,20 +6,10 @@ from jinja2 import evalcontextfilter, Markup, escape
 from collections import OrderedDict
 
 from app import app, mongo
+from helpers import resize_image
 
 import os
 import re
-
-
-# helper method for resizing images to proper size
-def resize_image(pic, max_width):
-    im = Image.open(pic)
-    dimensions = im.size
-
-    width_percent = (max_width / float(dimensions[0]))
-    new_height = int((float(dimensions[1]) * float(width_percent)))
-
-    return im.resize((max_width, new_height), Image.ANTIALIAS)
 
 
 @app.route('/')
