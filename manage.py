@@ -1,5 +1,5 @@
 from flask.ext.script import Manager
-from aniseasons import app, mongo
+from aniseasons.app import app, mongo
 from werkzeug.security import generate_password_hash
 
 manager = Manager(app)
