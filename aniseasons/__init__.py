@@ -22,3 +22,7 @@ if app.config['DEBUG']:
         '/media': app.config['MEDIA_PATH'],
         '/static': app.config['STATIC_PATH'],
     })
+
+from aniseasons import filters
+
+app.jinja_env.filters['nl2br'] = filters.nl2br
