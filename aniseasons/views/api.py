@@ -9,13 +9,13 @@ import os
 
 class AnimeAPI(MethodView):
 
-    def get(self, name):
+    def get(self, slug):
         if name is None:
             # GET /anime - Gets a list of all the anime
             return json_util.dumps(mongo.db.anime.find().sort([['_id', -1]]))
         else:
             # GET /anime/<name> - Gets a specific anime
-            anime = mongo.db.anime.find_one_or_404(name)
+            anime = mongo.db.anime.find_one_or_404({'slug': slug})
             return json_util.dumps(anime)
 
 
@@ -51,12 +51,12 @@ class AnimeAPI(MethodView):
             return "All the required fields have not been completed"
 
 
-def delete(self):
+def delete(self, slug):
         # DELETE /anime/name - Deletes a specific anime
         pass
 
 
-def put(self):
+def put(self, slug):
         # PUT /anime/name - updates a specific anime
         pass
 
