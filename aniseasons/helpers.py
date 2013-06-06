@@ -2,6 +2,7 @@ from flask import request
 from PIL import Image
 from unicodedata import normalize
 
+import os
 import re
 
 
@@ -13,6 +14,21 @@ def resize_image(pic, max_width):
     new_height = int((float(dimensions[1]) * float(width_percent)))
 
     return im.resize((max_width, new_height), Image.ANTIALIAS)
+
+
+def save_image_and_thumbnail(name, fileblob, path, full_width=600, thumb_width=194, ext='.jpg'):
+    filename = name + ext
+    thumb_filename = "thumb-" + filename
+
+    full_image_path = os.path.join(path, filename)
+    thumb_image_path = os.path.join(path, thumb_filename)
+
+    image = resize_image(fileblob, full_width)
+    image.save(full_image_path, 'JPEG', quality=95)
+    thumb = resize_image(open(full_image_path), thumb_width)
+    thumb.save(thumb_image_path, 'JPEG', quality=95)
+
+    return filename, thumb_filename
 
 
 def are_fields_valid(request):

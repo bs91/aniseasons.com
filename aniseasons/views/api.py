@@ -30,17 +30,10 @@ class AnimeAPI(MethodView):
 
                 anime['slug'] = helpers.slugify(anime['title'])
 
-                filename = anime['slug'] + '.jpg'
-                full_image_path = os.path.join(app.config['UPLOAD_PATH'], filename)
-                thumb_image_path = os.path.join(app.config['UPLOAD_PATH'], "thumb-" + filename)
+                saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
 
-                image = helpers.resize_image(request.files['file'], 600)
-                image.save(full_image_path, 'JPEG', quality=95)
-                thumb = helpers.resize_image(open(full_image_path), 194)
-                thumb.save(thumb_image_path, 'JPEG', quality=95)
-
-                anime['picture'] = filename
-                anime['thumb'] = "thumb-" + filename
+                anime['picture'] = saved_files[0]
+                anime['thumb'] = saved_files[1]
 
                 mongo.db.anime.insert(anime)
 
@@ -73,6 +66,7 @@ class AnimeAPI(MethodView):
 
     def put(self, slug):
             # PUT /anime/<name> - Updates a specific anime
+
             pass
 
 
