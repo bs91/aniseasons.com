@@ -24,8 +24,10 @@ if app.config['DEBUG']:
     })
 
 from aniseasons.views import frontend
+from aniseasons.views import api
 
 app.register_blueprint(frontend.mod)
+app.register_blueprint(api.mod)
 
 from aniseasons import filters
 
