@@ -3,8 +3,8 @@ from flask.ext.pymongo import PyMongo
 import os
 import unittest
 
-from aniseasons.app import app, mongo
-from aniseasons.manage import createuser, deleteuser
+from aniseasons import app, mongo
+from manage import createuser, deleteuser
 
 class AniseasonsTestCase(unittest.TestCase):
     def setUp(self):
