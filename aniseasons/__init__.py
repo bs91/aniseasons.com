@@ -23,6 +23,10 @@ if app.config['DEBUG']:
         '/static': app.config['STATIC_PATH'],
     })
 
+from aniseasons.views import frontend
+
+app.register_blueprint(frontend.mod)
+
 from aniseasons import filters
 
 app.jinja_env.filters['nl2br'] = filters.nl2br
