@@ -1,3 +1,5 @@
+import os
+
 class Settings(object):
     DEBUG = True
     SECRET_KEY = '}\xa8\xcd!\xcf\x00\\\xe7b\xec\x8a\\\xfdf\xd3J #\x880HUH\xb7'
