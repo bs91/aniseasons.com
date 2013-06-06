@@ -10,7 +10,7 @@ import os
 class AnimeAPI(MethodView):
 
     def get(self, slug):
-        if name is None:
+        if slug is None:
             # GET /anime - Gets a list of all the anime
             return json_util.dumps(mongo.db.anime.find().sort([['_id', -1]]))
         else:
@@ -51,18 +51,33 @@ class AnimeAPI(MethodView):
             return "All the required fields have not been completed"
 
 
-def delete(self, slug):
-        # DELETE /anime/name - Deletes a specific anime
-        pass
+    def delete(self, slug):
+            # DELETE /anime/<name> - Deletes a specific anime
+            query = {'slug': slug}
+
+            try:
+                anime = mongo.db.anime.find_one(query)
+
+                full_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['picture'])
+                thumb_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['thumb'])
+
+                os.remove(full_image_path)
+                os.remove(thumb_image_path)
+
+                mongo.db.anime.remove(query)
+
+                return anime['title'] + " has been deleted"
+            except Exception as e:
+                return str(e)
 
 
-def put(self, slug):
-        # PUT /anime/name - updates a specific anime
-        pass
+    def put(self, slug):
+            # PUT /anime/<name> - Updates a specific anime
+            pass
 
 
 mod = Blueprint('api', __name__, url_prefix='/api')
 anime_view = AnimeAPI.as_view('anime_api')
-mod.add_url_rule('/anime/', defaults={'name': None}, view_func=anime_view, methods=['GET'])
+mod.add_url_rule('/anime/', defaults={'slug': None}, view_func=anime_view, methods=['GET'])
 mod.add_url_rule('/anime/', view_func=anime_view, methods=['POST'])
-mod.add_url_rule('/anime/<name>', view_func=anime_view, methods=['GET', 'PUT', 'DELETE'])
+mod.add_url_rule('/anime/<slug>', view_func=anime_view, methods=['GET', 'PUT', 'DELETE'])
