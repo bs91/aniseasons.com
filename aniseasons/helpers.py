@@ -31,11 +31,12 @@ def save_image_and_thumbnail(name, fileblob, path, full_width=600, thumb_width=1
     return filename, thumb_filename
 
 
-def are_fields_valid(request):
-    if request.files and request.form['title'] and request.form['type'] and request.form['description']:
-        return True
-    else:
-        return False
+def are_fields_valid(request, is_update=False):
+    if request.form['title'] and request.form['type'] and request.form['description']:
+        if not is_update and request.files or is_update:
+            return True
+
+    return False
 
 def slugify(text, delim=u'-'):
     _punct_re = re.compile(r'[\t !"#$%&\'()*\-/<=>?@\[\\\]^_`{|},.]+')
