@@ -45,49 +45,49 @@ class AnimeAPI(MethodView):
 
 
     def delete(self, slug):
-            # DELETE /anime/<name> - Deletes a specific anime
-            query = {'slug': slug}
+        # DELETE /anime/<name> - Deletes a specific anime
+        query = {'slug': slug}
 
-            try:
-                anime = mongo.db.anime.find_one(query)
+        try:
+            anime = mongo.db.anime.find_one(query)
 
-                full_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['picture'])
-                thumb_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['thumb'])
+            full_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['picture'])
+            thumb_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['thumb'])
 
-                os.remove(full_image_path)
-                os.remove(thumb_image_path)
+            os.remove(full_image_path)
+            os.remove(thumb_image_path)
 
-                mongo.db.anime.remove(query)
+            mongo.db.anime.remove(query)
 
-                return anime['title'] + " has been deleted"
-            except Exception as e:
-                return str(e)
+            return anime['title'] + " has been deleted"
+        except Exception as e:
+            return str(e)
 
 
     def put(self, slug):
-            # PUT /anime/<name> - Updates a specific anime
-            anime = {}
+        # PUT /anime/<name> - Updates a specific anime
+        anime = {}
 
-            if helpers.are_fields_valid(request, True):
-                try:
-                    for key, value in request.form.iteritems():
-                        anime[key] = value
+        if helpers.are_fields_valid(request, True):
+            try:
+                for key, value in request.form.iteritems():
+                    anime[key] = value
 
-                    anime['slug'] = helpers.slugify(anime['title'])
+                anime['slug'] = helpers.slugify(anime['title'])
 
-                    if request.files:
-                        saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
+                if request.files:
+                    saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
 
-                        anime['picture'] = saved_files[0]
-                        anime['thumb'] = saved_files[1]
+                    anime['picture'] = saved_files[0]
+                    anime['thumb'] = saved_files[1]
 
-                    mongo.db.anime.update({'slug': slug}, {'$set': anime})
+                mongo.db.anime.update({'slug': slug}, {'$set': anime})
 
-                    return "'{0}' has been updated".format(anime['title'])
-                except Exception as e:
-                    return str(e)
-            else:
-                return "All the required fields have not been completed"
+                return "'{0}' has been updated".format(anime['title'])
+            except Exception as e:
+                return str(e)
+        else:
+            return "All the required fields have not been completed"
 
 
 mod = Blueprint('api', __name__, url_prefix='/api')
