@@ -66,8 +66,25 @@ class AnimeAPI(MethodView):
 
     def put(self, slug):
             # PUT /anime/<name> - Updates a specific anime
+            anime = {}
 
-            pass
+            try:
+                for key, value in request.form.iteritems():
+                    anime[key] = value
+
+                anime['slug'] = helpers.slugify(anime['title'])
+
+                if request.files:
+                    saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
+
+                    anime['picture'] = saved_files[0]
+                    anime['thumb'] = saved_files[1]
+
+                mongo.db.anime.update({'slug': slug}, {'$set': anime})
+
+                return "'{0}' has been updated".format(anime['title'])
+            except Exception as e:
+                return str(e)
 
 
 mod = Blueprint('api', __name__, url_prefix='/api')
