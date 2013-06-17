@@ -1,7 +1,8 @@
-<!DOCTYPE html>
-<html>
+<!doctype html>
+<html lang="en" ng-app>
     <head>
-        <title>Anime Listing Mockups</title>
+        <meta charset="utf-8">
+        <title>aniseasons</title>
         <link href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.2.2/css/bootstrap-combined.min.css" rel="stylesheet">
         <link type="text/css" href="{{ url_for('static', filename='css/style.css') }}" rel="stylesheet">
         <link type="text/css" href="{{ url_for('static', filename='css/font-awesome.min.css') }}" rel="stylesheet">
@@ -28,7 +29,6 @@
           &copy; aniseasons 2013
       </footer>
     </body>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.8.3/jquery.min.js"></script>
-    <script type="text/javascript" src="{{ url_for('static', filename='js/handlebars.js') }}"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.0.6/angular.min.js"></script>
     {% block js %}{% endblock %}
 </html>
