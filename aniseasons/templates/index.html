@@ -1,5 +1,14 @@
 {% extends "base.html" %}
+{% block css %}
+  <link type="text/css" href="{{ url_for('static', filename='css/listings.css') }}" rel="stylesheet">
+{% endblock css %}
 {% block content %}
-{% endblock %}
-{% block js %}
+<div class="tile masonry" ng-controller="AnimeListCtrl">
+  <div masonry>
+  <div class="item masonry-brick" ng-repeat="a in anime">
+    <img src="/media/imgs/{[{a.thumb}]}" />
+    <span class="title">{[{a.title}]}</span>
+  </div>
+  </div>
+</div>
 {% endblock %}
