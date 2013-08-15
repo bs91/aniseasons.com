@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('aniseasonsServices', ['ngResource']).
+angular.module('aniseasons.services', ['ngResource']).
     factory('Anime', function($resource){
   return $resource('api/anime/', {}, {
     query: {method:'GET', isArray:true}
