@@ -3,9 +3,17 @@
 function AnimeListCtrl($scope, Anime) {
   $scope.anime = Anime.query();
 
-  $scope.details = function(anime) {
-    console.log(anime)
-  }
+  $scope.open = function(anime) {
+    $scope.selectedAnime = anime;
+    $scope.shouldBeOpen = true;
+  };
+
+  $scope.close = function() {
+    $scope.shouldBeOpen = false;
+    $scope.selectedAnime = null;
+  };
+
+  $scope.opts = {};
 }
 
 function AdminCtrl($scope, Anime, $http) {
