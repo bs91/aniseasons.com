@@ -1,0 +1,9 @@
+{
+  "name": "aniseasons",
+  "description": "Seasonal anime listing that doesn't suck",
+  "version": "0.0.1",
+  "dependencies": {
+    "angular-masonry": "latest"
+  },
+  "directory": "aniseasons/static/js/"
+}
