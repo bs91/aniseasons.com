@@ -3,7 +3,8 @@
   "description": "Seasonal anime listing that doesn't suck",
   "version": "0.0.1",
   "dependencies": {
-    "angular-masonry": "latest"
+    "angular-masonry": "latest",
+    "angular-bootstrap": "~0.5.0"
   },
   "directory": "aniseasons/static/js/"
 }
