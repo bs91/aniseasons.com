@@ -26,7 +26,10 @@ class AnimeAPI(MethodView):
         if helpers.are_fields_valid(request):
             try:
                 for key, value in request.form.iteritems():
-                    anime[key] = value
+                    if key == "genre":
+                        anime[key] = value.split(',');
+                    else:
+                        anime[key] = value
 
                 anime['slug'] = helpers.slugify(anime['title'])
 
