@@ -2,6 +2,8 @@
 
 function AnimeListCtrl($scope, Anime) {
   $scope.anime = Anime.query();
+  $scope.genre = [];
+  $scope.query = {};
 
   $scope.open = function(anime) {
     $scope.selectedAnime = anime;
