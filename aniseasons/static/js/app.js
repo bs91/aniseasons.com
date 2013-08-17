@@ -8,6 +8,26 @@ Array.prototype.prettify = function() {
   return this.join(', ');
 }
 
+// Weird scoping issue with 'this'. Why can I sometimes do:
+// 
+//   this = this.substring();
+//
+// but get an "Invalid Assignment Left-Hand Side" at other times?
+//
+ 
+String.prototype.truncate = function(length) {
+  length = typeof length !== 'undefined' ? length : 100;
+  if (this.length > length) {
+    var str = this.substring(0, length);
+    
+    str = str.substring(0, Math.min(str.length, str.lastIndexOf(" ")));
+    str = str + " ...";
+    return str;
+  } else {
+    return this;
+  }
+}
+
 var app = angular.module('aniseasons', ['aniseasons.services', 'aniseasons.file', 'wu.masonry', 'ui.bootstrap', 'ui.select2']);
 
 app.config(function($interpolateProvider){
