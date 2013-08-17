@@ -1,11 +1,12 @@
 'use strict'
 
 Array.prototype.prettify = function() {
+  var genre_display = [];
   for(var i = 0; i < this.length; i++) {
-    this[i] = this[i].charAt(0).toUpperCase() + this[i].slice(1);
+    genre_display[i] = this[i].charAt(0).toUpperCase() + this[i].slice(1);
   }
 
-  return this.join(', ');
+  return genre_display.join(', ');
 }
 
 // Weird scoping issue with 'this'. Why can I sometimes do:
