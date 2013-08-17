@@ -1,5 +1,13 @@
 'use strict'
 
+Array.prototype.prettify = function() {
+  for(var i = 0; i < this.length; i++) {
+    this[i] = this[i].charAt(0).toUpperCase() + this[i].slice(1);
+  }
+
+  return this.join(', ');
+}
+
 var app = angular.module('aniseasons', ['aniseasons.services', 'aniseasons.file', 'wu.masonry', 'ui.bootstrap', 'ui.select2']);
 
 app.config(function($interpolateProvider){
