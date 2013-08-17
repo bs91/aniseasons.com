@@ -22,10 +22,9 @@ function AdminCtrl($scope, Anime, $http) {
   $scope.anime = Anime.query();
 
   $scope.add = function() {
-    var self = this;
     var fd = new FormData();
 
-    angular.forEach(self.entry, function(value, key) {
+    angular.forEach($scope.entry, function(value, key) {
       fd.append(key, value);
     });
 
