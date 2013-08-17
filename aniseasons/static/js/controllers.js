@@ -8,11 +8,13 @@ function AnimeListCtrl($scope, Anime) {
   $scope.open = function(anime) {
     $scope.selectedAnime = anime;
     $scope.shouldBeOpen = true;
+    $('body').addClass('noscroll');
   };
 
   $scope.close = function() {
     $scope.shouldBeOpen = false;
     $scope.selectedAnime = null;
+    $('body').removeClass('noscroll');
   };
 
   $scope.opts = {};
