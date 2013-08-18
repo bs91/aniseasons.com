@@ -23,6 +23,31 @@ if app.config['DEBUG']:
         '/static': app.config['STATIC_PATH'],
     })
 
+def get_genre_and_years():
+    # weird application context error when using `mongo`
+    from pymongo import MongoClient
+
+    client = MongoClient('localhost', 27017)
+    db = client[app.config['MONGO_DBNAME']]
+
+    anime = db.anime.find()
+
+    genres = []
+    years = []
+
+    # make this into a funky list comprehension when less brain-dead
+    for entry in anime:
+        for genre in entry['genre']:
+            if genre not in genres:
+                genres.append(genre)
+
+        if entry['year'] not in years and entry['year']:
+            years.append(entry['year'])
+
+    return (tuple(genres), tuple(years))
+
+GENRES, YEARS = get_genre_and_years()
+
 from aniseasons.views import frontend
 from aniseasons.views import api
 
