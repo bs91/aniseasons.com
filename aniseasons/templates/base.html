@@ -10,7 +10,7 @@
         <link type="text/css" href="{{ url_for('static', filename='js/components/select2/select2.css') }}" rel="stylesheet">
         {% block css %}{% endblock %}
     </head>
-    <body>
+    <body {% block controller %}{% endblock %}>
       <div class='contain'>
         <div class="navbar navbar-fixed-top navbar-inverse">
             <div class="navbar-inner">

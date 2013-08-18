@@ -3,7 +3,16 @@
 function AnimeListCtrl($scope, Anime) {
   $scope.anime = Anime.query();
   $scope.genre = [];
-  $scope.query = {};
+
+  $scope.query = {
+    season: "winter",
+    year: new Date().getFullYear()
+  };
+
+  $scope.opts = {
+    backdropFade: true,
+    dialogFade: true
+  };
 
   $scope.open = function(anime) {
     $scope.selectedAnime = anime;
@@ -16,8 +25,6 @@ function AnimeListCtrl($scope, Anime) {
     $scope.selectedAnime = null;
     $('body').removeClass('noscroll');
   };
-
-  $scope.opts = {};
 }
 
 function AdminCtrl($scope, Anime, $http) {
