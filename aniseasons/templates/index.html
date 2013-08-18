@@ -2,13 +2,76 @@
 {% block css %}
   <link type="text/css" href="{{ url_for('static', filename='css/listings.css') }}" rel="stylesheet">
 {% endblock css %}
-{% block content %}
-<div class="tile masonry" ng-controller="AnimeListCtrl">
-  <div masonry>
-  <div class="item masonry-brick" ng-repeat="a in anime">
-    <img src="/media/imgs/{[{a.thumb}]}" />
-    <span class="title">{[{a.title}]}</span>
+
+{# temporary hack for loading specific angular controllers onto the body #}
+{% block controller %}ng-controller="AnimeListCtrl"{% endblock %}
+
+{% block nav %}
+  <div class="filter">
+    <span>Type:</span>
+    <select ng-model="query.type">
+      <option value="">All</option>
+      <option value="tv">TV</option>
+      <option value="movie">Movie</option>
+      <option value="ova">OVA</option>
+      <option value="ona">ONA</option>
+      <option value="special">Special</option>
+      <option value="short">Short</option>
+    </select>
+    <span>Genre:</span>
+    <select multiple ui-select2 ng-model="genre" style="width: 250px;">
+    {% for genre in genres %}
+      <option value="{{ genre }}">{{ genre }}</option>
+    {% endfor %}
+    </select>
+    <span>Year:</span>
+    <select ng-model="query.year">
+      <option value="">All</option>
+    {% for year in years %}
+      <option value="{{ year }}">{{ year }}</option>
+    {% endfor %}
+    </select>
+    <span>Season:</span>
+    <select ng-model="query.season">
+      <option value="">All</option>
+      <option value="winter">Winter</option>
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="fall">Fall</option>
+    </select>
   </div>
+{% endblock nav %}
+
+{% block content %}
+<div class="tile masonry">
+  <div masonry>
+    <div class="item masonry-brick" ng-repeat="a in anime | filter:query | genreFilter:genre">
+      <img ng-click="open(a)" src="/media/imgs/{[{a.thumbnail}]}" />
+      <span ng-click="open(a)" class="title">{[{a.title}]}</span>
+      <span class="summary">{[{a.description.truncate(100)}]}</span>
+      <span class="genre">{[{a.genre.prettify()}]}</span>
+    </div>
+  </div>
+  <div modal="shouldBeOpen" close="close()" options="opts">
+    <div class="close-hack" ng-click="close()">
+      <div class="modal-container">
+        <div class="modal-header">
+          <h3>{[{selectedAnime.title}]}</h3>
+        </div>
+        <div class="modal-body">
+          <img src="/media/imgs/{[{selectedAnime.picture}]}" />
+          <p><strong>Genre:</strong> {[{selectedAnime.genre.prettify()}]}</p>
+          <p ng-show="selectedAnime.airdate"><strong>Air Date:</strong> {[{selectedAnime.airdate}]}</p>
+          <p ng-show="selectedAnime.studio"><strong>Studio:</strong> {[{selectedAnime.studio}]}</p>
+          <p ng-show="selectedAnime.website"><strong>Website:</strong> <a href="{[{selectedAnime.website}]}" target="_blank">{[{selectedAnime.website}]}</a></p>
+          <p><strong>Description:</strong><p>
+          <p>{[{selectedAnime.description}]}</p>
+        </div>
+        <div class="modal-footer">
+          <button class="btn btn-danger" ng-click="close()">Close</button>
+        </div>
+      </div>
+    </div>
   </div>
 </div>
 {% endblock %}
