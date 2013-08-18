@@ -22,3 +22,7 @@ def index():
             years.append(entry['year'])
 
     return render_template("index.html", years=years, genres=genres)
+
+@mod.route('/admin')
+def admin():
+    return render_template("admin.html")

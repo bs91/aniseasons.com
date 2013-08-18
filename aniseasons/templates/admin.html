@@ -2,25 +2,30 @@
 {% block css %}
     <link type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
 {% endblock %}
-{% block nav %}
-    {% if session['logged_in'] %}
-        <a href="/logout">Logout</a>
-    {% endif %}
-{% endblock %}
+
+{% block controller %}ng-controller="AdminCtrl"{% endblock %}
+
 {% block content %}
-    {% if not session.logged_in %}
-    {% for message in get_flashed_messages() %}
-        <div class="flash">{{ message }}</div>
-    {% endfor %}
-    <form id="login" action="{{ url_for('admin') }}" method="post">
-        <label for="username">Username: </label><input type="text" name="username" />
-        <label for="username">Password: </label><input type="password" name="password" />
-        <br />
-        <input type="submit" name="submit" value="Submit" />
-    </form>
-    {% else %}
-    <a class="add" href="#">Add</a>
-    <div id="animelist">
-    </div>
-    {% endif %}
+  <form ng-submit="add()">
+    Picture: <input file="entry.file" type="file" />
+    Title: <input ng-model="entry.title" type="text" name="title" />
+    Type:
+    <select ng-model="entry.type">
+      <option value="tv">TV</option>
+      <option value="movie">Movie</option>
+      <option value="ova">OVA</option>
+      <option value="ona">ONA</option>
+      <option value="special">Special</option>
+      <option value="short">Short</option>
+    </select>
+    Genre:
+    <select multiple ng-model="entry.genre">
+      <option value="shounen">Shounen</option>
+      <option value="shoujo">Shoujo</option>
+      <option value="mecha">Mecha</option>
+      <option value="rounin">Rounin</option>
+    </select>
+    <textarea ng-model="entry.description"></textarea>
+    <input type="submit" value="Submit" />
+  </form>
 {% endblock %}
