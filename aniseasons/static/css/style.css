@@ -61,11 +61,12 @@ body {
     color: #fff;
 }
 
-.overlay {
-    background: rgba(230, 230, 230, 0.9);
+.modal {
     width: 100%;
     z-index: 10000;
-    top: 0;
+    top: 0 !important;
+    margin: 0 !important;
+    background: none !important;
     left: 0;
     bottom: 0;
     right: 0;
@@ -74,13 +75,12 @@ body {
     overflow-y: scroll;
 }
 
-.overlay:hover {
+.modal:hover {
     cursor: -webkit-zoom-out;
 }
  
-.overlay .macro {
+.modal .modal-container {
     margin: 20px auto;
-    padding: 10px 20px;
     width: 600px;
     background: #fff;
     color: #8c7e7e;
@@ -89,23 +89,27 @@ body {
     -webkit-transition: all 1s ease-out;
 }
 
-.overlay .macro strong {
+.modal .modal-container .modal-body {
+    max-height: 100%;
+}
+
+.modal .modal-container strong {
     text-transform: capitalize;
 }
 
-.overlay .macro p:first-of-type {
+.modal .modal-container p:first-of-type {
     margin-top: 25px;
 }
 
-.overlay .macro .button-wrapper {
+.modal .modal-container .button-wrapper {
     margin-top: 10px;
 }
 
-.overlay .macro .button-wrapper i:first-child {
+.modal .modal-container .button-wrapper i:first-child {
     margin-right: 15px;
 }
 
-.overlay .macro:hover {
+.modal .modal-container:hover {
     cursor: auto;
 }
 
@@ -145,6 +149,20 @@ footer {
 
 .nav-items .view-state .active {
     border: 1px solid;
+}
+
+.filter {
+    float: right;
+}
+
+.filter span {
+    line-height: 60px;
+    color: #fff;
+    margin-left: 10px;
+}
+
+.filter select {
+    margin-bottom: 0px;
 }
 
 i {
