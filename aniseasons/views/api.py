@@ -36,7 +36,7 @@ class AnimeAPI(MethodView):
                 saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
 
                 anime['picture'] = saved_files[0]
-                anime['thumb'] = saved_files[1]
+                anime['thumbnail'] = saved_files[1]
 
                 mongo.db.anime.insert(anime)
 

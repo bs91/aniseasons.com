@@ -8,7 +8,20 @@
 {% block content %}
   <form ng-submit="add()">
     Picture: <input file="entry.file" type="file" />
-    Title: <input ng-model="entry.title" type="text" name="title" />
+    Title: <input ng-model="entry.title" type="text" />
+    Year: <input ng-model="entry.year" type="text" />
+    Trailer: <input ng-model="entry.trailer" type="text" />
+    Studio: <input ng-model="entry.studio" type="text" />
+    Twitter: <input ng-model="entry.twitter" type="text" />
+    Air Date: <input ng-model="entry.airdate" type="text" />
+    Website: <input ng-model="entry.website" type="text" />
+    Season:
+    <select ng-model="entry.season">
+      <option value="winter">Winter</option>
+      <option value="spring">Spring</option>
+      <option value="summer">Summer</option>
+      <option value="fall">Fall</option>
+    </select>
     Type:
     <select ng-model="entry.type">
       <option value="tv">TV</option>
@@ -19,11 +32,10 @@
       <option value="short">Short</option>
     </select>
     Genre:
-    <select multiple ng-model="entry.genre">
-      <option value="shounen">Shounen</option>
-      <option value="shoujo">Shoujo</option>
-      <option value="mecha">Mecha</option>
-      <option value="rounin">Rounin</option>
+    <select multiple ui-select2 ng-model="entry.genre" style="width: 250px;">
+    {% for genre in genres %}
+      <option value="{{ genre }}">{{ genre }}</option>
+    {% endfor %}
     </select>
     <textarea ng-model="entry.description"></textarea>
     <input type="submit" value="Submit" />
