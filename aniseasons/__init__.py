@@ -37,9 +37,10 @@ def get_genre_and_years():
 
     # make this into a funky list comprehension when less brain-dead
     for entry in anime:
-        for genre in entry['genre']:
-            if genre not in genres:
-                genres.append(genre)
+        if 'genre' in entry.keys():
+            for genre in entry['genre']:
+                if genre not in genres and genre != '':
+                    genres.append(genre)
 
         if entry['year'] not in years and entry['year']:
             years.append(entry['year'])
