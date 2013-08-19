@@ -163,6 +163,7 @@ footer {
 
 .filter select {
     margin-bottom: 0px;
+    width: auto;
 }
 
 i {
