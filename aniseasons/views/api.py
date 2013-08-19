@@ -55,10 +55,10 @@ class AnimeAPI(MethodView):
             anime = mongo.db.anime.find_one(query)
 
             full_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['picture'])
-            thumb_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['thumb'])
+            thumbnail_image_path = os.path.join(app.config['UPLOAD_PATH'], anime['thumbnail'])
 
             os.remove(full_image_path)
-            os.remove(thumb_image_path)
+            os.remove(thumbnail_image_path)
 
             mongo.db.anime.remove(query)
 
@@ -82,7 +82,7 @@ class AnimeAPI(MethodView):
                     saved_files = helpers.save_image_and_thumbnail(anime['slug'], request.files['file'], app.config['UPLOAD_PATH'])
 
                     anime['picture'] = saved_files[0]
-                    anime['thumb'] = saved_files[1]
+                    anime['thumbnail'] = saved_files[1]
 
                 mongo.db.anime.update({'slug': slug}, {'$set': anime})
 
