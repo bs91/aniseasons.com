@@ -45,6 +45,19 @@ function AdminCtrl($scope, Anime, $http) {
       },
       data: fd,
       transformRequest: function(data) { return data; }
+    }).success(function(data) {
+      $scope.entry = null;
+      $scope.anime.unshift(new Anime(data));
     });
-  }
+  };
+
+  $scope.edit = function(anime) {
+    console.log(anime);
+  };
+
+  $scope.remove = function(anime) {
+    return anime.$remove(function() {
+      $scope.anime.splice($scope.anime.indexOf(anime), 1);
+    });
+  };
 }
