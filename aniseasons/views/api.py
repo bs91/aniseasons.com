@@ -86,7 +86,8 @@ class AnimeAPI(MethodView):
 
                 mongo.db.anime.update({'slug': slug}, {'$set': anime})
 
-                return "'{0}' has been updated".format(anime['title'])
+                updated_anime = mongo.db.anime.find_one_or_404({'slug': anime['slug']})
+                return json_util.dumps(updated_anime)
             except Exception as e:
                 return str(e)
         else:
