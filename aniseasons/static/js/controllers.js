@@ -52,7 +52,25 @@ function AdminCtrl($scope, Anime, $http) {
   };
 
   $scope.edit = function(anime) {
-    console.log(anime);
+    var fd = new FormData();
+
+    angular.forEach(anime, function(value, key) {
+      if (key !== '_id' && key !== '$$hashKey') {
+        fd.append(key, value);
+      }
+    });
+
+    return $http({
+      method: 'PUT',
+      url: '/api/anime/' + anime.slug,
+      headers: {
+        'Content-Type': undefined
+      },
+      data: fd,
+      transformRequest: function(data) { return data; }
+    }).success(function(data) {
+      anime = new Anime(data);
+    });
   };
 
   $scope.remove = function(anime) {
