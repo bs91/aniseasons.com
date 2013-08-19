@@ -39,8 +39,8 @@ class AnimeAPI(MethodView):
                 anime['thumbnail'] = saved_files[1]
 
                 mongo.db.anime.insert(anime)
-
-                return "'{0}' has been added".format(anime['title'])
+                inserted_anime = mongo.db.anime.find_one_or_404({'slug': anime['slug']})
+                return json_util.dumps(anime)
             except Exception as e:
                 return str(e)
         else:
