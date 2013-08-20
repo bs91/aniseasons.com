@@ -44,7 +44,7 @@
 
 {% block content %}
 <div class="tile masonry">
-  <div masonry>
+  <div masonry options="{ transitionTransition: '0' }">
     <div class="item masonry-brick" ng-repeat="a in anime | filter:query | genreFilter:genre">
       <img ng-click="open(a)" src="/media/imgs/{[{a.thumbnail}]}" />
       <span ng-click="open(a)" class="title">{[{a.title}]}</span>
