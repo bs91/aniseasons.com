@@ -47,12 +47,6 @@ body {
     height: 40px;
 }
 
-.nav-items .winter, .nav-items .spring, .nav-items .summer, .nav-items .fall {
-    line-height: 60px;
-    margin-right: 10px;
-    font-weight: bold;
-}
-
 .nav-items a {
     color: #fff;
 }
@@ -174,19 +168,19 @@ a.selected:hover {
     text-decoration: none;
 }
 
-a.selected.winter {
+.winter {
     color: #08c;
 }
 
-a.selected.spring {
+.spring {
     color: #5eb95e;
 }
 
-a.selected.summer {
+.summer {
     color: #dd514c;
 }
 
-a.selected.fall {
+.fall {
     color: #faa732;
 }
 

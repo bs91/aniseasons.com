@@ -7,6 +7,9 @@
 {% block controller %}ng-controller="AnimeListCtrl"{% endblock %}
 
 {% block nav %}
+  <div>
+    <h3 ng-show="query.season" class="{[{ query.season }]}">|{[{ query.season }]}</h3>
+  </div>
   <div class="filter">
     <span>Type:</span>
     <select ng-model="query.type">
