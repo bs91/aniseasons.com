@@ -1,12 +1,35 @@
 'use strict';
 
-function AnimeListCtrl($scope, Anime) {
+function AnimeListCtrl($scope, $routeParams, $route, $location, Anime) {
+  var lastRoute = $route.current;
+  $scope.$on('$locationChangeSuccess', function(event) {
+    $route.current = lastRoute;
+  });
+
   $scope.anime = Anime.query();
   $scope.genre = [];
 
+  $scope.open = function(anime) {
+    $scope.selectedAnime = anime;
+    $scope.shouldBeOpen = true;
+
+    if ($routeParams.slug === undefined) {
+      $location.url('anime/' + $scope.selectedAnime.slug);
+    }
+
+    $('body').addClass('noscroll');
+  };
+
+  $scope.close = function() {
+    $scope.shouldBeOpen = false;
+    $scope.selectedAnime = null;
+    $location.url($scope.query.season + '/' + $scope.query.year);
+    $('body').removeClass('noscroll');
+  };
+
   $scope.query = {
-    season: "winter",
-    year: new Date().getFullYear()
+    season: $routeParams.season || 'fall',
+    year: $routeParams.year || new Date().getFullYear()
   };
 
   $scope.opts = {
@@ -14,17 +37,14 @@ function AnimeListCtrl($scope, Anime) {
     dialogFade: true
   };
 
-  $scope.open = function(anime) {
-    $scope.selectedAnime = anime;
-    $scope.shouldBeOpen = true;
-    $('body').addClass('noscroll');
-  };
-
-  $scope.close = function() {
-    $scope.shouldBeOpen = false;
-    $scope.selectedAnime = null;
-    $('body').removeClass('noscroll');
-  };
+  $scope.$watch('query.year + query.season', function() {
+    if($routeParams.slug === undefined) {
+      $location.url($scope.query.season + '/' + $scope.query.year);
+    } else {
+      $scope.open(Anime.get({slug:$routeParams.slug}));
+      delete $routeParams.slug;
+    }
+  });
 }
 
 function AdminCtrl($scope, Anime, $http) {
