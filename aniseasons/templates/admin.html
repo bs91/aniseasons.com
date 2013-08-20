@@ -1,11 +1,12 @@
-{% extends "base.html" %}
-{% block css %}
-    <link type="text/css" href="{{ url_for('static', filename='css/admin.css') }}" rel="stylesheet">
-{% endblock %}
-
-{% block controller %}ng-controller="AdminCtrl"{% endblock %}
-
-{% block content %}
+<div class="navbar navbar-fixed-top navbar-inverse">
+    <div class="navbar-inner">
+        <div class="nav-items">
+           <a href="/"><h3>aniseasons</h3></a>
+        </div>
+    </div>
+</div>
+<div class='navbar-push'></div>
+<div class="container">
   <form ng-submit="add()">
     Picture: <input file="entry.file" type="file" />
     Title: <input ng-model="entry.title" type="text" />
@@ -75,4 +76,5 @@
     <button class="btn btn-success" ng-click="edit(a)">Update</button>
     <button class="btn btn-danger" ng-click="remove(a)">Delete</button>
   </form>
-{% endblock %}
+</div>
+<div class='push'></div>

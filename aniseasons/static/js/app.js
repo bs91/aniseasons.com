@@ -35,6 +35,14 @@ app.config(function($interpolateProvider){
   $interpolateProvider.startSymbol('{[{').endSymbol('}]}');
 });
 
+app.config(function($locationProvider, $routeProvider) {
+  $locationProvider.html5Mode(true);
+  $routeProvider.when('/', { templateUrl: '/templates/index', controller: AnimeListCtrl });
+  $routeProvider.when('/anime/:slug', { templateUrl: '/templates/index', controller: AnimeListCtrl });
+  $routeProvider.when('/:season/:year', { templateUrl: '/templates/index', controller: AnimeListCtrl });
+  $routeProvider.when('/admin', { templateUrl: '/templates/admin', controller: AdminCtrl });
+});
+
 app.filter('genreFilter', function() {
   return function(anime, genres) {
     var items = {
