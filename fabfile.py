@@ -17,5 +17,8 @@ def deploy():
         print '--- Installing Packages ---'
         sudo('pip install -r requirements.txt')
 
+        print '--- Installing Javascript Components --'
+        run('bower install')
+
         print '--- Restarting UWSGI Instance ---'
         sudo('service uwsgi restart')
