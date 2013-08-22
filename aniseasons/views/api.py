@@ -1,6 +1,7 @@
 from bson import json_util
-from flask import Blueprint, request
+from flask import Blueprint, request, Response, session
 from flask.views import MethodView
+from werkzeug import check_password_hash
 
 from aniseasons import app, helpers, mongo
 
@@ -98,6 +99,26 @@ class AnimeAPI(MethodView):
 
 
 mod = Blueprint('api', __name__, url_prefix='/api')
+
+@mod.route('/user/login', methods=['POST'])
+def login():
+    message = {}
+    user = mongo.db.users.find_one({'username': request.form['username']})
+
+    if check_password_hash(user['password'], request.form['password']):
+        status = 200
+        session['logged_in'] = True
+        message['message'] = "Login successful"
+    else:
+        status = 401
+        message['message'] = "Login unsuccessful"
+
+    return Response(json_util.dumps(message), status=status, mimetype='application/json')
+
+@mod.route('/user/logout', methods=['POST'])
+def logout():
+    pass
+
 anime_view = AnimeAPI.as_view('anime_api')
 mod.add_url_rule('/anime/', defaults={'slug': None}, view_func=anime_view, methods=['GET'])
 mod.add_url_rule('/anime/', view_func=anime_view, methods=['POST'])

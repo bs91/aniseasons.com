@@ -48,7 +48,33 @@ function AnimeListCtrl($scope, $routeParams, $route, $location, Anime) {
 }
 
 function AdminCtrl($scope, Anime, $http) {
-  $scope.anime = Anime.query();
+  $scope.anime;
+
+  $scope.login = function() {
+    var fd = new FormData();
+    fd.append('username', $scope.user.name);
+    fd.append('password', $scope.user.password);
+
+    return $http({
+      method: 'POST',
+      url: '/api/user/login',
+      headers: {
+        'Content-Type': undefined
+      },
+      data: fd,
+      transformRequest: function(data) { return data; }
+    }).success(function() {
+      $scope.user.logged_in = true;
+      $scope.anime = Anime.query();
+      console.log('logged in');
+    }).error(function() {
+      console.log('error');
+    });
+  }
+
+  $scope.logout = function() {
+
+  }
 
   $scope.add = function() {
     var fd = new FormData();

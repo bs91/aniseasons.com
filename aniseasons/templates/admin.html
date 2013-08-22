@@ -7,7 +7,12 @@
 </div>
 <div class='navbar-push'></div>
 <div class="container">
-  <form ng-submit="add()">
+  <form ng-hide="user.logged_in" ng-submit="login()">
+    Username: <input ng-model="user.name"type="text"><br />
+    Password: <input ng-model="user.password"type="password"><br />
+    <button class="btn btn-success">Login</button>
+  </form>
+  <form ng-show="user.logged_in" ng-submit="add()">
     Picture: <input file="entry.file" type="file" />
     Title: <input ng-model="entry.title" type="text" />
     Year: <input ng-model="entry.year" type="text" />
@@ -41,7 +46,7 @@
     <textarea ng-model="entry.description"></textarea>
     <button class="btn btn-success">Add</button>
   </form>
-  <form ng-repeat="a in anime">
+  <form ng-show="user.logged_in" ng-repeat="a in anime">
     Picture: <input file="a.file" type="file" />
     Title: <input ng-model="a.title" type="text" />
     Year: <input ng-model="a.year" type="text" />
