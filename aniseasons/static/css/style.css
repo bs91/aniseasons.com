@@ -28,6 +28,11 @@ body {
     margin: 0 auto -40px;
 }
 
+.tile.masonry {
+    padding-top: 70px;
+    padding-bottom: 40px;
+}
+
 .float {
     position: fixed;
     top: 70px;
