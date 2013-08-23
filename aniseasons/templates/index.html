@@ -24,14 +24,12 @@
             </select>
             <span>Year:</span>
             <select ng-model="query.year">
-              <option value="">All</option>
             {% for year in years %}
               <option value="{{ year }}">{{ year }}</option>
             {% endfor %}
             </select>
             <span>Season:</span>
             <select ng-model="query.season">
-              <option value="">All</option>
               <option value="winter">Winter</option>
               <option value="spring">Spring</option>
               <option value="summer">Summer</option>
