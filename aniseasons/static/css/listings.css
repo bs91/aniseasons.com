@@ -4,6 +4,7 @@
     background: #fff;
     margin: 10px;
     width: 194px;
+    display: none;
     box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -webkit-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
     -moz-box-shadow: 0 1px 3px rgba(34,25,25,0.4);
@@ -76,6 +77,10 @@
 
 .season {
     display: none;
+}
+
+.item.loaded {
+    display: block;
 }
 
 @media screen and (min-width: 1170px) {
