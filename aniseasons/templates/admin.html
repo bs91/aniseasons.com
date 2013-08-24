@@ -47,6 +47,7 @@
     <button class="btn btn-success">Add</button>
   </form>
   <form ng-show="user.logged_in" ng-repeat="a in anime">
+    <div class="picture-preview" style="background: url('/media/imgs/{[{a.thumbnail}]}') center center; height: 100px; width: 100px;"></div>
     Picture: <input file="a.file" type="file" />
     Title: <input ng-model="a.title" type="text" />
     Year: <input ng-model="a.year" type="text" />
