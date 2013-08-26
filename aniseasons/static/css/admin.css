@@ -37,3 +37,9 @@ textarea {
 .submit {
     text-align: center;
 }
+
+.alert {
+    width: 800px;
+    float: right;
+    margin: 10px 0px;
+}

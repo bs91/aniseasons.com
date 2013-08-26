@@ -50,6 +50,11 @@ function AnimeListCtrl($scope, $routeParams, $route, $location, Anime) {
 function AdminCtrl($scope, Anime, $http) {
   $scope.anime;
 
+  $scope.alert = {
+    type: 'info',
+    msg: 'Admin alerts will be displayed here'
+  };
+
   $scope.login = function() {
     var fd = new FormData();
     fd.append('username', $scope.user.name);
@@ -66,7 +71,6 @@ function AdminCtrl($scope, Anime, $http) {
     }).success(function() {
       $scope.user.logged_in = true;
       $scope.anime = Anime.query();
-      console.log('logged in');
     }).error(function() {
       console.log('error');
     });
@@ -93,7 +97,13 @@ function AdminCtrl($scope, Anime, $http) {
       transformRequest: function(data) { return data; }
     }).success(function(data) {
       $scope.entry = null;
-      $scope.anime.unshift(new Anime(data));
+      var new_anime = new Anime(data);
+      $scope.alert.type = 'success';
+      $scope.alert.msg = new_anime.title + ' has successfully been added';
+      $scope.anime.unshift(new_anime);
+    }).error(function(data) {
+      $scope.error = true;
+      console.log(data);
     });
   };
 
@@ -115,12 +125,18 @@ function AdminCtrl($scope, Anime, $http) {
       data: fd,
       transformRequest: function(data) { return data; }
     }).success(function(data) {
-      anime = new Anime(data);
+      var edited_anime = new Anime(data);
+      $scope.alert.type = 'success';
+      $scope.alert.msg = edited_anime.title + ' has successfully been updated';
+    }).error(function(data) {
+      console.log(data);
     });
   };
 
   $scope.remove = function(anime) {
     return anime.$remove(function() {
+      $scope.alert.type = 'success';
+      $scope.alert.msg = anime.message;
       $scope.anime.splice($scope.anime.indexOf(anime), 1);
     });
   };

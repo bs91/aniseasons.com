@@ -2,6 +2,7 @@
     <div class="navbar-inner">
         <div class="nav-items">
            <a href="/"><h3>aniseasons</h3></a>
+           <alert ng-show="$parent.user.logged_in" ng-model="alert" type="alert.type">{[{alert.msg}]}</alert>
         </div>
     </div>
 </div>
