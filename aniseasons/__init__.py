@@ -54,7 +54,3 @@ from aniseasons.views import api
 
 app.register_blueprint(frontend.mod)
 app.register_blueprint(api.mod)
-
-from aniseasons import filters
-
-app.jinja_env.filters['nl2br'] = filters.nl2br
