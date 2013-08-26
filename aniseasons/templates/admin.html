@@ -1,13 +1,8 @@
-<div class="navbar navbar-fixed-top navbar-inverse">
-    <div class="navbar-inner">
-        <div class="nav-items">
-           <a href="/"><h3>aniseasons</h3></a>
-           <alert ng-show="$parent.user.logged_in" ng-model="alert" type="alert.type">{[{alert.msg}]}</alert>
-        </div>
-    </div>
-</div>
-<div class='navbar-push'></div>
-<div class="container">
+{% extends "default.html" %}
+{% block navigation %}
+  <alert ng-show="$parent.user.logged_in" ng-model="alert" type="alert.type">{[{alert.msg}]}</alert>
+{% endblock %}
+{% block content %}
   <form ng-hide="user.logged_in" ng-submit="login()">
     Username: <input ng-model="user.name"type="text"><br />
     Password: <input ng-model="user.password"type="password"><br />
@@ -83,5 +78,4 @@
     <button class="btn btn-success" ng-click="edit(a)">Update</button>
     <button class="btn btn-danger" ng-click="remove(a)">Delete</button>
   </form>
-</div>
-<div class='push'></div>
+{% endblock %}
