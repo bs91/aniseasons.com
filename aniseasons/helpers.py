@@ -32,9 +32,10 @@ def save_image_and_thumbnail(name, fileblob, path, full_width=600, thumb_width=1
 
 
 def are_fields_valid(request, is_update=False):
-    if request.form['title'] and request.form['type'] and request.form['description']:
-        if not is_update and request.files or is_update:
-            return True
+    if len(request.form) > 0:
+        if request.form['title'] and request.form['type'] and request.form['description']:
+            if not is_update and request.files or is_update:
+                return True
 
     return False
 
