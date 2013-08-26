@@ -102,8 +102,8 @@ function AdminCtrl($scope, Anime, $http) {
       $scope.alert.msg = new_anime.title + ' has successfully been added';
       $scope.anime.unshift(new_anime);
     }).error(function(data) {
-      $scope.error = true;
-      console.log(data);
+      $scope.alert.type = 'error';
+      $scope.alert.msg = data.message;
     });
   };
 
@@ -129,7 +129,8 @@ function AdminCtrl($scope, Anime, $http) {
       $scope.alert.type = 'success';
       $scope.alert.msg = edited_anime.title + ' has successfully been updated';
     }).error(function(data) {
-      console.log(data);
+      $scope.alert.type = 'error';
+      $scope.alert.msg = data.message;
     });
   };
 
