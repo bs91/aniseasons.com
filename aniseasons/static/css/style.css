@@ -28,7 +28,7 @@ body {
     margin: 0 auto -40px;
 }
 
-.tile.masonry {
+.tile.masonry, .admin-wrapper {
     padding-top: 70px;
     padding-bottom: 40px;
 }
