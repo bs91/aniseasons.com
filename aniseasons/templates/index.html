@@ -53,11 +53,11 @@
           </div>
           <div class="modal-body">
             <img src="/media/imgs/{[{selectedAnime.picture}]}" />
-            <p ng-show="selectedAnime.genre != ''"><strong>Genre:</strong> {[{selectedAnime.genre.prettify()}]}</p>
-            <p ng-show="selectedAnime.airdate != ''"><strong>Air Date:</strong> {[{selectedAnime.airdate}]}</p>
-            <p ng-show="selectedAnime.studio != ''"><strong>Studio:</strong> {[{selectedAnime.studio}]}</p>
-            <p ng-show="selectedAnime.website != ''"><strong>Website:</strong> <a href="{[{selectedAnime.website}]}" target="_blank">{[{selectedAnime.website}]}</a></p>
-            <p ng-show="selectedAnime.twitter != ''"><strong>Twitter:</strong> <a href="https://twitter.com/{[{selectedAnime.twitter}]}" target="_blank">@{[{selectedAnime.twitter}]}</a></p>
+            <p ng-show="selectedAnime.genre && selectedAnime.genre != ''"><strong>Genre:</strong> {[{selectedAnime.genre.prettify()}]}</p>
+            <p ng-show="selectedAnime.airdate && selectedAnime.airdate != ''"><strong>Air Date:</strong> {[{selectedAnime.airdate}]}</p>
+            <p ng-show="selectedAnime.studio && selectedAnime.studio != ''"><strong>Studio:</strong> {[{selectedAnime.studio}]}</p>
+            <p ng-show="selectedAnime.website && selectedAnime.website != ''"><strong>Website:</strong> <a href="{[{selectedAnime.website}]}" target="_blank">{[{selectedAnime.website}]}</a></p>
+            <p ng-show="selectedAnime.twitter && selectedAnime.twitter != ''"><strong>Twitter:</strong> <a href="https://twitter.com/{[{selectedAnime.twitter}]}" target="_blank">@{[{selectedAnime.twitter}]}</a></p>
             <p><strong>Description:</strong><p>
             <p>{[{selectedAnime.description}]}</p>
           </div>
