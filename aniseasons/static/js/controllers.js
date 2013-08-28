@@ -8,6 +8,7 @@ function AnimeListCtrl($scope, $routeParams, $route, $location, Anime) {
 
   $scope.anime = Anime.query();
   $scope.genre = [];
+  $scope.mediaToggle = true;
 
   $scope.open = function(anime) {
     $scope.selectedAnime = anime;
@@ -25,6 +26,7 @@ function AnimeListCtrl($scope, $routeParams, $route, $location, Anime) {
     $scope.selectedAnime = null;
     $location.url($scope.query.season + '/' + $scope.query.year);
     $('body').removeClass('noscroll');
+    $scope.mediaToggle = true;
   };
 
   $scope.query = {
