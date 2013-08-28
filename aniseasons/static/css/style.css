@@ -112,6 +112,10 @@ body {
     cursor: auto;
 }
 
+.modal-body img {
+  margin-bottom: 10px;
+}
+
 footer {
     height: 40px;
     background: #1b1b1b;
@@ -166,7 +170,20 @@ footer {
 }
 
 i {
-    font-size: 20px;
+  font-size: 20px;
+}
+
+i:hover {
+  cursor: pointer;
+}
+
+.icon-picture {
+  color: #008299;
+}
+
+.icon-youtube-play {
+  margin-left: 10px;
+  color: #cc181e;
 }
 
 a.selected:hover {
